@@ -5,17 +5,19 @@ import { Home } from '../home';
 import { LogIn } from '../login';
 import { Menu } from '../menu'
 import { StyledAppWrapper } from './app.style';
+import { Play } from '../play';
 
 const App = () => {
   return (
     <StyledAppWrapper>
-      <Background>
-        <Menu />
-        <Router>
+      <Menu />
+      <Router>
+        {/* <Background> */}
           <Home path="/"/>
           <LogIn path="/login"/>
-        </Router>
-      </Background>
+        {/* </Background> */}
+        <Play path="/play"/>
+      </Router>
     </StyledAppWrapper>
   )
 }

@@ -7,6 +7,6 @@ export const StyledMonkey = styled.div`
   width: 50px;
   height: 50px;
   position: relative;
-  top: ${({topY}) => topY - 50 }px;
-  left: ${({ leftX }) => leftX - 200}px;
+  top: ${({topY}) => topY}px;
+  left: ${({ leftX }) => leftX - 420}px;
 `

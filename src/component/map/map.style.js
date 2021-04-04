@@ -8,5 +8,6 @@ export const StyledMap = styled(Paper)`
     background-size: cover;
     width: 800px;
     height: 600px;
+    position: relative;
   }
 `

@@ -1,0 +1,1 @@
+export { SliderMenu } from './slider-menu.component';

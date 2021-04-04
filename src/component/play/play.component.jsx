@@ -1,35 +1,57 @@
-import React, { useState } from 'react';
-import { Map } from '../map';
-import { Monkey } from '../monkey/monkey.component';
-import { useMousePosition } from '../util/mouse-position'
-import { StyledPlayWrapper } from './play.style';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setMonkeyCoordinateAction, setPlacedMonkeyAction } from "../../store/monkey/monkey.action";
+import { Map } from "../map";
+import { Monkey } from "../monkey/monkey.component";
+import { StyledPlayWrapper } from "./play.style";
 
 const Play = () => {
-  const [monkey, placeMonkey] = useState(false);
-  const mousePosition = useMousePosition()
+  const dispatch = useDispatch();
+  const [positionX, positionY, placedMonkey, selectedImg] = useSelector(({ monkey }) => [
+    monkey.coordinate.x,
+    monkey.coordinate.y,
+    monkey.placed,
+    monkey.selected.img,
+  ]);
 
-  const HandleMonkeyPlacement = () => {
-    placeMonkey(true)
-    console.log(monkey)
-  }
-
-  const handlePositionOnMap = () => {
-    if (mousePosition.y > 46 && mousePosition.y < 625 && mousePosition.x > 180 && mousePosition.x < 970 ){
-      console.log('bun')
-    } else {
-      console.log('nope')
-    }
-  }
+  useEffect(() => {
+    const setFromEvent = (e) => {
+      if (
+        e.clientY > 46 &&
+        e.clientY < 600 &&
+        e.clientX > 400 &&
+        e.clientX < 1200
+      ) {
+        dispatch(setMonkeyCoordinateAction({ x: e.clientX, y: e.clientY }));
+        dispatch(setPlacedMonkeyAction({ x: e.clientX, y: e.clientY }));
+      } else {
+        dispatch(setMonkeyCoordinateAction({ x: -400, y: -400 }));
+        dispatch(setPlacedMonkeyAction({ x: -400, y: -400 }));
+        // alert("Please place item on the map");
+      }
+    };
+    window.addEventListener("click", setFromEvent);
+    return () => {
+      window.removeEventListener("click", setFromEvent);
+    };
+  }, []);
 
   return (
-    <StyledPlayWrapper>
-      {handlePositionOnMap()}
-      <div>x:{mousePosition.x} y:{mousePosition.y}</div>
+    <StyledPlayWrapper selectedImg={selectedImg}>
+      {/* <div>
+        x:{positionX} y:{positionY}
+      </div> */}
       <Map>
-        <Monkey topY={mousePosition.y} leftX={mousePosition.x}/>
+        {placedMonkey && placedMonkey.map(m => {
+          console.log(m)
+          return (
+            <Monkey key={m.x + m.y} topY={m.y} leftX={m.x} />
+          )
+        })
+        }
       </Map>
     </StyledPlayWrapper>
-  )
-}
+  );
+};
 
 export { Play };

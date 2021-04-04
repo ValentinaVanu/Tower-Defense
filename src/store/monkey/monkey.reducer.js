@@ -5,7 +5,11 @@ const initialState = {
     x: -100,
     y: -100,
   },
-  placed: []
+  placed: [],
+  selected: {
+    type: '',
+    img: ''
+  },
 }
 
 
@@ -16,6 +20,11 @@ export const monkeyReducer = ( state = initialState, action ) => {
         ...state,
         coordinate: action.coordinate
       }
+      case constant.SELECT_MONKEY:
+        return {
+          ...state,
+          selected: action.selected
+        }
     case constant.PLACED_MONKEY:
       return {
         ...state,

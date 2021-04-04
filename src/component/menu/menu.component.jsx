@@ -10,9 +10,18 @@ import { Link } from '@reach/router';
 import { SliderMenu } from '../slider-menu/slider-menu.component';
 import { useDispatch, useSelector } from 'react-redux';
 import DartMonkeyImg from '../../image/DartMonkey.png'
+import DruidMonkeyImg from '../../image/DruidMonkey.png'
+import MageMonkeyImg from '../../image/MageMonkey.webp'
 
 import * as SM from './menu.style';
 import { setSliderAction } from '../../store/slider-menu/slider-menu.action';
+import { setSelectedMonkeyAction } from '../../store/monkey/monkey.action';
+
+const monkeyTypes = {
+  dartMonkey: DartMonkeyImg,
+  druidMonkey: DruidMonkeyImg,
+  mageMonkey: MageMonkeyImg
+}
 
 const Menu = () => {
   const dispatch = useDispatch()
@@ -22,7 +31,8 @@ const Menu = () => {
     dispatch(setSliderAction(!show))
   }
 
-  const selectMonkey = () => {
+  const selectMonkey = (selected) => {
+    dispatch(setSelectedMonkeyAction(selected))
     console.log('gonna add more monkeys to select from')
   }
 
@@ -34,12 +44,15 @@ const Menu = () => {
             <IconButton onClick={toggleSliderMenu} edge="start" color="inherit" aria-label="open drawer">
               <MenuIcon />
             </IconButton>
-            {/* <Link to="/login"> */}
-              <Fab onClick={selectMonkey} color="secondary" aria-label="add" className={classes.fabButton}>
-                <img width='50px' height='50px' src={DartMonkeyImg} alt="DartMonkey"/>
-                {/* <AccountCircleIcon /> */}
-              </Fab>
-            {/* </Link> */}
+              <SM.StyledFabContainer>
+                {Object.keys(monkeyTypes).map(type => {
+                  return (
+                    <Fab onClick={() => selectMonkey({type: type, img: monkeyTypes[type]})} color="secondary" aria-label="add" className={classes.fabButton}>
+                      <img width='50px' height='50px' src={monkeyTypes[type]} alt={type}/>
+                    </Fab>
+                  )
+                })}
+              </SM.StyledFabContainer>
             <div className={classes.grow} />
             <IconButton color="inherit">
               <SearchIcon />

@@ -7,10 +7,11 @@ import { StyledPlayWrapper } from "./play.style";
 
 const Play = () => {
   const dispatch = useDispatch();
-  const [positionX, positionY, placedMonkey] = useSelector(({ monkey }) => [
+  const [positionX, positionY, placedMonkey, selectedImg] = useSelector(({ monkey }) => [
     monkey.coordinate.x,
     monkey.coordinate.y,
     monkey.placed,
+    monkey.selected.img,
   ]);
 
   useEffect(() => {
@@ -24,8 +25,8 @@ const Play = () => {
         dispatch(setMonkeyCoordinateAction({ x: e.clientX, y: e.clientY }));
         dispatch(setPlacedMonkeyAction({ x: e.clientX, y: e.clientY }));
       } else {
-        dispatch(setMonkeyCoordinateAction({ x: -50, y: -50 }));
-        dispatch(setPlacedMonkeyAction({ x: 0, y: 0 }));
+        dispatch(setMonkeyCoordinateAction({ x: -400, y: -400 }));
+        dispatch(setPlacedMonkeyAction({ x: -400, y: -400 }));
         // alert("Please place item on the map");
       }
     };
@@ -36,15 +37,15 @@ const Play = () => {
   }, []);
 
   return (
-    <StyledPlayWrapper>
-      <div>
+    <StyledPlayWrapper selectedImg={selectedImg}>
+      {/* <div>
         x:{positionX} y:{positionY}
-      </div>
+      </div> */}
       <Map>
         {placedMonkey && placedMonkey.map(m => {
           console.log(m)
           return (
-            <Monkey key={m} topY={m.y} leftX={m.x} />
+            <Monkey key={m.x + m.y} topY={m.y} leftX={m.x} />
           )
         })
         }

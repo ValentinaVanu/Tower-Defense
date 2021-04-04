@@ -5,6 +5,11 @@ export const setMonkeyCoordinateAction = (coordinate) => ({
   coordinate
 })
 
+export const setSelectedMonkeyAction = selected => ({
+  type: constant.SELECT_MONKEY,
+  selected
+})
+
 export const setPlacedMonkeyAction = placed => ({
   type: constant.PLACED_MONKEY,
   placed

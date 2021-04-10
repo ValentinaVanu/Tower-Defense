@@ -3,11 +3,17 @@ import startBackgroundImg from '../../image/start.jpg';
 
 export const StyledBackground = styled.div`
   height: 100%;
-  width: 100%;
-  background-image: url(${startBackgroundImg});
+  ::after {
+  content: "";
+  background: url(${startBackgroundImg});
   background-position: center center;
   background-size: cover;
-  background-repeat: no-repeat;
-  display: block;
-
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
 `

@@ -3,6 +3,10 @@ import { Paper, TextField } from '@material-ui/core';
 import { Form } from 'formik';
 
 
+export const StyledFormTitle = styled.h1`
+  color: #00a4f1;
+`
+
 export const StyledTextField = styled(TextField)`
   && {
     margin: 10px;

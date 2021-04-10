@@ -1,10 +1,13 @@
 import React from "react";
-import { MainGrid } from "../main-grid";
-import { StyledPaper } from "./login.style";
+import { Paper, TextField } from "@material-ui/core";
+import { Form } from "formik";
+import { Background } from "../background";
 import { BlueButton } from "../button/button.component";
-import * as SL from "./login.style";
 
-const LogIn = ({
+
+// NEED TO FIND A BETTER SOLUTION TO SHARING FORMIK IN TWO COMPONENTS
+
+const SignUp = ({
   values,
   errors,
   touched,
@@ -12,25 +15,24 @@ const LogIn = ({
   handleBlur,
   isSubmitting,
 }) => {
-
   return (
-    <MainGrid>
-      <StyledPaper elevation={8}>
-        <SL.StyledFormTitle style={{ textAlign: "center" }}>
+    <Background>
+      <Paper elevation={8}>
+        <h1 style={{ textAlign: "center" }}>
           Log In
-        </SL.StyledFormTitle>
-        <SL.StyledForm>
-          <SL.StyledTextField
+        </h1>
+        <Form>
+          <TextField
             label="E-mail"
             variant="outlined"
             type="email"
             name="email"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.email}
+            // value={values.email}
           />
           {errors.email && touched.email && errors.email}
-          <SL.StyledTextField
+          <TextField
             label="Password"
             variant="outlined"
             type="password"
@@ -46,10 +48,10 @@ const LogIn = ({
             type="submit"
             disabled={isSubmitting}
           />
-        </SL.StyledForm>
-      </StyledPaper>
-    </MainGrid>
+        </Form>
+      </Paper>
+    </Background>
   );
 };
 
-export { LogIn };
+export { SignUp };

@@ -9,4 +9,5 @@ export const StyledBackground = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   display: block;
+
 `

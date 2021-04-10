@@ -7,6 +7,7 @@ import { Menu } from '../menu'
 import { StyledAppWrapper, StyledRouter } from './app.style';
 import { Play } from '../play';
 import { Provider } from 'react-redux';
+import { SignUp } from '../sign-up/sign-up.component';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           {/* <Background> */}
             <Home path="/"/>
             <LogIn path="/login"/>
+            <SignUp path="/sign-up" />
           {/* </Background> */}
           <Play path="/play"/>
         </StyledRouter>

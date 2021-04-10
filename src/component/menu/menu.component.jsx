@@ -5,8 +5,8 @@ import Fab from '@material-ui/core/Fab';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Link } from '@reach/router';
+// import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+// import { Link } from '@reach/router';
 import { SliderMenu } from '../slider-menu/slider-menu.component';
 import { useDispatch, useSelector } from 'react-redux';
 import DartMonkeyImg from '../../image/DartMonkey.png'
@@ -45,9 +45,9 @@ const Menu = () => {
               <MenuIcon />
             </IconButton>
               <SM.StyledFabContainer>
-                {Object.keys(monkeyTypes).map(type => {
+                {Object.keys(monkeyTypes).map((type, key) => {
                   return (
-                    <Fab onClick={() => selectMonkey({type: type, img: monkeyTypes[type]})} color="secondary" aria-label="add" className={classes.fabButton}>
+                    <Fab key={key} onClick={() => selectMonkey({type: type, img: monkeyTypes[type]})} color="secondary" aria-label="add" className={classes.fabButton}>
                       <img width='50px' height='50px' src={monkeyTypes[type]} alt={type}/>
                     </Fab>
                   )

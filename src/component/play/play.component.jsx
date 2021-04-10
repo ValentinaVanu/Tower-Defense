@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMonkeyCoordinateAction, setPlacedMonkeyAction } from "../../store/monkey/monkey.action";
 import { Map } from "../map";
@@ -7,9 +7,9 @@ import { StyledPlayWrapper } from "./play.style";
 
 const Play = () => {
   const dispatch = useDispatch();
-  const [positionX, positionY, placedMonkey, selectedImg] = useSelector(({ monkey }) => [
-    monkey.coordinate.x,
-    monkey.coordinate.y,
+  const [ placedMonkey, selectedImg] = useSelector(({ monkey }) => [
+    // monkey.coordinate.x,
+    // monkey.coordinate.y,
     monkey.placed,
     monkey.selected.img,
   ]);

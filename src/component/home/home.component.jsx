@@ -1,8 +1,12 @@
 import React from 'react';
+import { Background } from '../background'
+import { LogIn } from '../login';
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <Background>
+      <LogIn/>
+    </Background>
   )
 }
 

@@ -12,7 +12,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <StyledAppWrapper>
-        <Menu />
+        {/* <Menu /> */}
         <StyledRouter>
           {/* <Background> */}
             <Home path="/"/>

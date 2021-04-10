@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMonkeyCoordinateAction, setPlacedMonkeyAction } from "../../store/monkey/monkey.action";
 import { Map } from "../map";
+import { Menu } from "../menu";
 import { Monkey } from "../monkey/monkey.component";
 import { StyledPlayWrapper } from "./play.style";
 
@@ -50,6 +51,7 @@ const Play = () => {
         })
         }
       </Map>
+      <Menu />
     </StyledPlayWrapper>
   );
 };

@@ -1,9 +1,9 @@
-import { Form } from 'formik';
+import { Paper } from '@material-ui/core';
 import styled from 'styled-components';
 
-export const StyledForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 12px 5px;
+export const StyledPaper = styled(Paper)`
+  align-self: center;
+  justify-self: center;
+  padding: 2rem;
+  margin: 2rem;
 `

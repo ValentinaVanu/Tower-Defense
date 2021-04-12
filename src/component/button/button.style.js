@@ -10,7 +10,7 @@ export const StyledBlueButton = styled(Button)`
     margin-top: 1rem;
 
     :hover {
-      background-color: #00a4f1;
+      background-color: #44650a;
       color: #fff;
     }
   }

@@ -1,23 +1,25 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import { MainGrid } from "../main-grid";
-import * as yup from 'yup';
+import * as yup from "yup";
 import { BlueButton } from "../button/button.component";
-import { Link } from '@reach/router';
+import { Link } from "@reach/router";
 
-
-import * as SS from './sign-up.style'
+import * as SS from "./sign-up.style";
 import { Paper, TextField } from "@material-ui/core";
 import { Background } from "../background";
 
 const SignUp = () => {
   const validate = yup.object().shape({
-    email: yup.string().email('Invalid email').required('Email is required'),
-    password: yup.string().required('Required!')
-    .min(8, 'Too Short!')
-    // .minLowercase(3, 'at least 3 lowercase characters')
-    // .minUppercase(1, 'Should contain at least 1 uppercase')
-    // .minNumber(1, 'Should contain at least 1 number')
+    username: yup.string().required('Required!'),
+    email: yup.string().email("Invalid email").required("Email is required"),
+    password: yup
+      .string()
+      .required("Required!")
+      .min(8, "Too Short!")
+      .minLowercase(3, "at least 3 lowercase characters")
+      .minUppercase(1, "Should contain at least 1 uppercase")
+      .minNumbers(1, "Should contain at least 1 number"),
   });
 
   return (
@@ -25,9 +27,7 @@ const SignUp = () => {
       <MainGrid>
         <SS.StyledPaper elevation={8}>
           {/* <div>Sign Up</div> */}
-          <h1 style={{ textAlign: "center" }}>
-            Sign Up
-          </h1>
+          <h1 style={{ textAlign: "center" }}>Sign Up</h1>
           <Formik
             initialValues={{ username: "", email: "", password: "" }}
             validationSchema={validate}
@@ -78,7 +78,7 @@ const SignUp = () => {
                   type="submit"
                   disabled={isSubmitting}
                 />
-                <Link to='/'>Go back</Link>
+                <Link to="/">Go back</Link>
               </SS.StyledForm>
             )}
           </Formik>

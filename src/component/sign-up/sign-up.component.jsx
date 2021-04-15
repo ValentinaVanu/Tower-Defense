@@ -1,15 +1,16 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import { MainGrid } from "../main-grid";
-import * as yup from "yup";
 import { BlueButton } from "../button/button.component";
 import { Link } from "@reach/router";
+import * as yup from "yup";
 
 import * as SS from "./sign-up.style";
-import { Paper, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { Background } from "../background";
 
 const SignUp = () => {
+  require("yup-password")(yup);
   const validate = yup.object().shape({
     username: yup.string().required('Required!'),
     email: yup.string().email("Invalid email").required("Email is required"),
@@ -17,17 +18,18 @@ const SignUp = () => {
       .string()
       .required("Required!")
       .min(8, "Too Short!")
-      .minLowercase(3, "at least 3 lowercase characters")
-      .minUppercase(1, "Should contain at least 1 uppercase")
-      .minNumbers(1, "Should contain at least 1 number"),
+      .minLowercase(3, "Should be at least 3 lowercase characters")
+      .minUppercase(1, 'Should contain at least 1 uppercase')
+      .minNumbers(1, 'Should contain at least 1 number')
+      .minSymbols(1, 'Should contain at least one special symbol')
   });
 
   return (
     <Background>
       <MainGrid>
         <SS.StyledPaper elevation={8}>
-          {/* <div>Sign Up</div> */}
-          <h1 style={{ textAlign: "center" }}>Sign Up</h1>
+          <SS.StyledFormHeader to="/">Log in</SS.StyledFormHeader>
+          <SS.StyledFormTitle>Sign Up</SS.StyledFormTitle>
           <Formik
             initialValues={{ username: "", email: "", password: "" }}
             validationSchema={validate}
@@ -37,7 +39,6 @@ const SignUp = () => {
           >
             {({
               values,
-              errors,
               touched,
               handleChange,
               handleBlur,
@@ -45,7 +46,7 @@ const SignUp = () => {
               isSubmitting,
             }) => (
               <SS.StyledForm onSubmit={handleSubmit}>
-                <TextField
+                <SS.StyledTextField
                   label="Username"
                   variant="outlined"
                   type="text"
@@ -54,7 +55,7 @@ const SignUp = () => {
                   onBlur={handleBlur}
                   value={values.username}
                 />
-                <TextField
+                <SS.StyledTextField
                   label="E-mail"
                   variant="outlined"
                   type="email"
@@ -63,7 +64,7 @@ const SignUp = () => {
                   onBlur={handleBlur}
                   value={values.email}
                 />
-                <TextField
+                <SS.StyledTextField
                   label="Password"
                   variant="outlined"
                   type="password"
@@ -78,7 +79,7 @@ const SignUp = () => {
                   type="submit"
                   disabled={isSubmitting}
                 />
-                <Link to="/">Go back</Link>
+                <SS.StyledLink to="/">Go back</SS.StyledLink>
               </SS.StyledForm>
             )}
           </Formik>

@@ -1,16 +1,20 @@
-import { Paper, TextField } from '@material-ui/core';
+import styled from "styled-components";
+import { Paper, TextField } from "@material-ui/core";
+import { Form } from "formik";
 import { Link } from '@reach/router';
-import { Form } from 'formik';
-import styled from 'styled-components';
 
 
-export const StyledFormTitle = styled.h1`
-  color: #00a4f1;
-  text-align: center;
-`;
-
-export const StyledFormHeader = styled(Link)`
+export const StyledLink = styled(Link)`
   text-decoration: none;
+  color: #00a4f1;
+  margin-top: 22px;
+
+  :hover {
+    color: #44650a;
+  }
+`
+
+export const StyledFormHeader = styled.div`
   position: absolute;
   background-color: #00a4f1;
   top: -35px;
@@ -26,15 +30,9 @@ export const StyledFormHeader = styled(Link)`
   }
 `;
 
-export const StyledLink = styled(Link)`
-  text-decoration: none;
+export const StyledFormTitle = styled.h1`
   color: #00a4f1;
-  margin-top: 22px;
-
-  :hover {
-    color: #44650a;
-  }
-`
+`;
 
 export const StyledTextField = styled(TextField)`
   && {

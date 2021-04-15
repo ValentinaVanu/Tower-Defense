@@ -24,16 +24,12 @@ const LogIn = () => {
       .minSymbols(1, 'Should contain at least one special symbol')
   });
 
-  const handleFormRoute = () => {
-    navigate('/sign-up')
-  }
-
   return (
     <Background>
       <MainGrid>
         <StyledPaper elevation={8}>
-          <SL.StyledFormHeader onClick={handleFormRoute}>Sign Up</SL.StyledFormHeader>
-          <SL.StyledFormTitle style={{ textAlign: "center" }}>
+          <SL.StyledFormHeader to="/sign-up">Sign Up</SL.StyledFormHeader>
+          <SL.StyledFormTitle>
             Log In
           </SL.StyledFormTitle>
           <Formik

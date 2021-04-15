@@ -14,7 +14,8 @@ export const StyledLink = styled(Link)`
   }
 `
 
-export const StyledFormHeader = styled.div`
+export const StyledFormHeader = styled(Link)`
+  text-decoration: none;
   position: absolute;
   background-color: #00a4f1;
   top: -35px;
@@ -32,6 +33,7 @@ export const StyledFormHeader = styled.div`
 
 export const StyledFormTitle = styled.h1`
   color: #00a4f1;
+  text-align: center;
 `;
 
 export const StyledTextField = styled(TextField)`

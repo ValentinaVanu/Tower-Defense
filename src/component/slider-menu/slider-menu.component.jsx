@@ -16,9 +16,6 @@ const SliderMenu = ({ show }) => {
     <SS.StyledSSPaper show={show}>
       <List className={classes.root}>
         <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-          </ListItemAvatar>
           <ListItemText
             primary="Brunch this weekend?"
             secondary={
@@ -35,6 +32,9 @@ const SliderMenu = ({ show }) => {
               </React.Fragment>
             }
           />
+          <ListItemAvatar>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          </ListItemAvatar>
         </ListItem>
         <Divider variant="inset" component="li" />
       </List>

@@ -5,7 +5,7 @@ import MapImg from '../../image/map.png';
 
 export const XYMap = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column-reverse;
   flex-wrap: wrap;
   width: 50rem;
   height: 37.5rem;

@@ -3,7 +3,8 @@ import { StyledMonkey } from './monkey.style';
 
 const Monkey = ({ topY, leftX }) => {
   return (
-    <StyledMonkey topY={topY} leftX={leftX} />
+    <StyledMonkey/>
+    // <StyledMonkey topY={topY} leftX={leftX} />
   )
 };
 

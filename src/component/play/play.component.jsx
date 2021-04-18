@@ -17,38 +17,35 @@ const Play = () => {
 
   // const noMonkey = ['49', '48', '47', '46', '36', '26', '15', '14', '24', '34', '44', '45', '56', '57', '67', '68', '77', '76', '66', '55', '54', '53', '52', '42', '32', '31', '61', '71', '72', '73', '74', '84', '94']
 
-  useEffect(() => {
-    const setFromEvent = (e) => {
-      if (
-        e.clientY > 46 &&
-        e.clientY < 600 &&
-        e.clientX > 400 &&
-        e.clientX < 1200
-      ) {
-        dispatch(setMonkeyCoordinateAction({ x: e.clientX, y: e.clientY }));
-        dispatch(setPlacedMonkeyAction({ x: e.clientX, y: e.clientY }));
-      } else {
-        dispatch(setMonkeyCoordinateAction({ x: -400, y: -400 }));
-        dispatch(setPlacedMonkeyAction({ x: -400, y: -400 }));
-        // alert("Please place item on the map");
-      }
-    };
-    window.addEventListener("click", setFromEvent);
-    return () => {
-      window.removeEventListener("click", setFromEvent);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const setFromEvent = (e) => {
+  //     if (
+  //       e.clientY > 46 &&
+  //       e.clientY < 600 &&
+  //       e.clientX > 400 &&
+  //       e.clientX < 1200
+  //     ) {
+  //       dispatch(setMonkeyCoordinateAction({ x: e.clientX, y: e.clientY }));
+  //       dispatch(setPlacedMonkeyAction({ x: e.clientX, y: e.clientY }));
+  //     } else {
+  //       dispatch(setMonkeyCoordinateAction({ x: -400, y: -400 }));
+  //       dispatch(setPlacedMonkeyAction({ x: -400, y: -400 }));
+  //       // alert("Please place item on the map");
+  //     }
+  //   };
+  //   window.addEventListener("click", setFromEvent);
+  //   return () => {
+  //     window.removeEventListener("click", setFromEvent);
+  //   };
+  // }, []);
 
   return (
     <StyledPlayWrapper selectedImg={selectedImg}>
-      {/* <div>
-        x:{positionX} y:{positionY}
-      </div> */}
       <Map>
         {placedMonkey && placedMonkey.map(m => {
           console.log(m)
           return (
-            <Monkey key={m.x + m.y} topY={m.y} leftX={m.x} />
+            <Monkey key={m.x + m.y}/>
           )
         })
         }

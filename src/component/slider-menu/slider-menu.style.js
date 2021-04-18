@@ -4,9 +4,11 @@ import { makeStyles, Paper } from '@material-ui/core';
 
 export const StyledSSPaper = styled(Paper)`
   && {
-    max-width: 400px;
+    max-width: 350px;
+    height: 90%;
     position: fixed;
     bottom: 60px;
+    left: 0;
     display: ${({ show }) => show ? 'block' : 'none'};
   }
 `

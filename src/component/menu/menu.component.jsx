@@ -16,6 +16,7 @@ import MageMonkeyImg from '../../image/MageMonkey.webp'
 import * as SM from './menu.style';
 import { setSliderAction } from '../../store/slider-menu/slider-menu.action';
 import { setSelectedMonkeyAction } from '../../store/monkey/monkey.action';
+import { DropDown } from '../drop-down';
 
 const monkeyTypes = {
   dartMonkey: DartMonkeyImg,
@@ -58,6 +59,7 @@ const Menu = () => {
               <SearchIcon />
             </IconButton>
             <IconButton edge="end" color="inherit">
+              <DropDown />
               <MoreIcon />
             </IconButton>
           </Toolbar>

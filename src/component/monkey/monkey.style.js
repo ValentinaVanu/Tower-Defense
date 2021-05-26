@@ -6,6 +6,7 @@ export const StyledMonkey = styled.div`
   background-size: cover;
   width: 50px;
   height: 50px;
+  /* display: ${({ display }) => display ? 'block' : 'none'} */
   /* position: absolute;
   top: ${({topY}) => topY - 50}px;
   left: ${({ leftX }) => leftX - 380}px; */

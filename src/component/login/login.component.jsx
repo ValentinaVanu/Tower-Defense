@@ -1,43 +1,43 @@
+import React, { useRef, useState } from "react";
 import { Formik } from "formik";
-import React from "react";
+import { validate, initialLogInValues, initialLogInLabels } from "./validation";
 import { MainGrid } from "../main-grid";
 import { StyledPaper } from "./login.style";
-import { BlueButton } from "../button/button.component";
-import { useNavigate } from '@reach/router';
-import * as yup from "yup";
+import { Background } from "../background";
+import { Button } from "@material-ui/core";
+
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useAuth } from "../context/auth-context";
 
 import * as SL from "./login.style";
-import { Background } from "../background";
 
 const LogIn = () => {
-  require("yup-password")(yup);
-  const navigate = useNavigate();
-  const validate = yup.object().shape({
-    email: yup.string().email("Invalid email").required("Email is required"),
-    password: yup
-      .string()
-      .required("Required!")
-      .min(8, "Too Short!")
-      .minLowercase(3, "Should be at least 3 lowercase characters")
-      .minUppercase(1, 'Should contain at least 1 uppercase')
-      .minNumbers(1, 'Should contain at least 1 number')
-      .minSymbols(1, 'Should contain at least one special symbol')
-  });
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  console.log(emailRef, passwordRef);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    await login(emailRef.current.value, passwordRef.current.value);
+    setLoading(false);
+  }
 
   return (
     <Background>
       <MainGrid>
         <StyledPaper elevation={8}>
           <SL.StyledFormHeader to="/sign-up">Sign Up</SL.StyledFormHeader>
-          <SL.StyledFormTitle>
-            Log In
-          </SL.StyledFormTitle>
+          <SL.StyledFormTitle>Log In</SL.StyledFormTitle>
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={initialLogInValues}
             validationSchema={validate}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
+            onSubmit={handleSubmit}
           >
             {({
               values,
@@ -47,6 +47,7 @@ const LogIn = () => {
               handleBlur,
               handleSubmit,
               isSubmitting,
+              setFieldValue,
             }) => (
               <SL.StyledForm onSubmit={handleSubmit}>
                 <SL.StyledTextField
@@ -57,6 +58,7 @@ const LogIn = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
+                  inputRef={emailRef}
                 />
                 {errors.email && touched.email && errors.email}
                 <SL.StyledTextField
@@ -67,15 +69,13 @@ const LogIn = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
+                  inputRef={passwordRef}
                 />
                 {errors.password && touched.password && errors.password}
-                <BlueButton
-                  label={"Log In"}
-                  variant="contained"
-                  type="submit"
-                  disabled={isSubmitting}
-                />
-                <SL.StyledLink to='/sign-up'>Create an account</SL.StyledLink>
+                <Button variant="contained" type="submit">
+                  Log in
+                </Button>
+                <SL.StyledLink to="/sign-up">Create an account</SL.StyledLink>
               </SL.StyledForm>
             )}
           </Formik>

@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { Background } from "../background";
+import { AuthProvider } from "../context/auth-context";
 import { LogIn } from "../login";
 import { SignUp } from "../sign-up/sign-up.component";
 
@@ -10,8 +11,10 @@ const Home = () => {
  
   return (
     <Fragment>
-      <LogIn />
-      <SignUp />
+     {/* <AuthProvider> */}
+        <LogIn />
+        <SignUp />
+     {/* </AuthProvider> */}
     </Fragment>
   );
 };

@@ -10,13 +10,11 @@ import {DndContext} from '@dnd-kit/core';
 
 
 const Play = () => {
-  const dispatch = useDispatch();
-  const [ placedMonkey, selectedImg] = useSelector(({ monkey }) => [
-    // monkey.coordinate.x,
-    // monkey.coordinate.y,
-    monkey.placed,
-    monkey.selected.img,
-  ]);
+  // const dispatch = useDispatch();
+  // const [ placedMonkey, selectedImg] = useSelector(({ monkey }) => [
+  //   monkey.placed,
+  //   monkey.selected.img,
+  // ]);
   const [isDropped, setIsDropped] = useState(false);
 
   const handleDragEnd = (event) => {
@@ -26,7 +24,8 @@ const Play = () => {
   }
 
   return (
-    <StyledPlayWrapper selectedImg={selectedImg}>
+    // <StyledPlayWrapper selectedImg={selectedImg}>
+    <StyledPlayWrapper>
       {!isDropped ? <Monkey/> : null}
       <DndContext onDragEnd={handleDragEnd}>
         <Map>

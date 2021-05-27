@@ -1,28 +1,33 @@
-import { Form, Formik } from "formik";
-import React from "react";
+import React, { useRef, useState } from "react";
+import { Formik } from "formik";
 import { MainGrid } from "../main-grid";
-import { BlueButton } from "../button/button.component";
-import { Link } from "@reach/router";
-import * as yup from "yup";
+import { Button } from "@material-ui/core";
+import { Background } from "../background";
+import { initialSigninValues, validate } from "./validation";
+import { useAuth } from "../context/auth-context";
 
 import * as SS from "./sign-up.style";
-import { TextField } from "@material-ui/core";
-import { Background } from "../background";
 
 const SignUp = () => {
-  require("yup-password")(yup);
-  const validate = yup.object().shape({
-    username: yup.string().required('Required!'),
-    email: yup.string().email("Invalid email").required("Email is required"),
-    password: yup
-      .string()
-      .required("Required!")
-      .min(8, "Too Short!")
-      .minLowercase(3, "Should be at least 3 lowercase characters")
-      .minUppercase(1, 'Should contain at least 1 uppercase')
-      .minNumbers(1, 'Should contain at least 1 number')
-      .minSymbols(1, 'Should contain at least one special symbol')
-  });
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { signup } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const usernameRef = useRef();
+
+  async function handleSigninSubmit(e) {
+    e.preventDefault();
+    try {
+      console.log("a mers");
+      setError("");
+      setLoading(true);
+      await signup(emailRef.current.value, passwordRef.current.value);
+    } catch {
+      setError("Failed to log in");
+    }
+    setLoading(false);
+  }
 
   return (
     <Background>
@@ -31,29 +36,30 @@ const SignUp = () => {
           <SS.StyledFormHeader to="/">Log in</SS.StyledFormHeader>
           <SS.StyledFormTitle>Sign Up</SS.StyledFormTitle>
           <Formik
-            initialValues={{ username: "", email: "", password: "" }}
+            initialValues={initialSigninValues}
             validationSchema={validate}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
+            onSubmit={handleSigninSubmit}
           >
             {({
               values,
+              errors,
               touched,
               handleChange,
               handleBlur,
               handleSubmit,
               isSubmitting,
+              setFieldValue,
             }) => (
-              <SS.StyledForm onSubmit={handleSubmit}>
+              <SS.StyledForm onSubmit={handleSigninSubmit}>
                 <SS.StyledTextField
                   label="Username"
                   variant="outlined"
                   type="text"
-                  name="name"
+                  name="username"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.username}
+                  value={values.Username}
+                  inputRef={emailRef}
                 />
                 <SS.StyledTextField
                   label="E-mail"
@@ -63,6 +69,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
+                  inputRef={emailRef}
                 />
                 <SS.StyledTextField
                   label="Password"
@@ -72,13 +79,14 @@ const SignUp = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
+                  inputRef={passwordRef}
                 />
-                <BlueButton
-                  label={"Submit"}
+                <Button
                   variant="contained"
                   type="submit"
-                  disabled={isSubmitting}
-                />
+                >
+                  Submit
+                </Button>
                 <SS.StyledLink to="/">Go back</SS.StyledLink>
               </SS.StyledForm>
             )}

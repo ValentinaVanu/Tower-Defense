@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setMonkeyCoordinateAction,
-  setPlacedMonkeyAction,
-} from "../../store/monkey/monkey.action";
+import React, { useState } from "react";
 import { Map } from "../map";
 import { Menu } from "../menu";
 import { Monkey } from "../monkey/monkey.component";
 import { StyledPlayWrapper } from "./play.style";
-
 import { DndContext } from "@dnd-kit/core";
-import { StyledMap, XYCell, XYMap } from "../map/map.style";
+import { StyledMap, XYMap } from "../map/map.style";
 import { useDroppable } from "@dnd-kit/core";
 
 const Play = () => {

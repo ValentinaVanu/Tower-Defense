@@ -2,12 +2,13 @@ import React from "react";
 import { StyledMonkey } from "./monkey.style";
 import {useDraggable} from '@dnd-kit/core';
 
-const Monkey = (props) => {
+const Monkey = ({...props}) => {
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
-    id: 'draggable',
+    id: props.id,
   });
 
   const style = transform ? {
+    zIndex: 999, 
     transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
   } : undefined;
 

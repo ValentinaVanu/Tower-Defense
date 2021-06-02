@@ -14,14 +14,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <StyledAppWrapper>
-        {/* <Menu /> */}
         <AuthProvider>
           <StyledRouter>
-            {/* <Background> */}
             <Home path="/" />
             <LogIn path="/login" />
             <SignUp path="/sign-up" />
-            {/* </Background> */}
             <Play path="/play" />
           </StyledRouter>
         </AuthProvider>

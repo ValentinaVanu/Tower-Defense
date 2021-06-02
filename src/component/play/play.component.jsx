@@ -26,7 +26,6 @@ const Play = () => {
     setParent(over ? over.id : null);
   };
 
-  // REFACTOR
   return (
     <StyledPlayWrapper>
       <DndContext onDragEnd={handleDragEnd}>
@@ -34,7 +33,6 @@ const Play = () => {
         <StyledMap>
           <XYMap>
             {XYmap.map((id) => {
-              console.log(id);
               return (
                 <Map key={id} id={id} style={style} ref={setNodeRef}>
                   {id}

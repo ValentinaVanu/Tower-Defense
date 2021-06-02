@@ -1,10 +1,10 @@
 import React from "react";
-import { StyledMonkey } from "./monkey.style";
+import { StyledMonkey, StyledMonkeyBtn } from "./monkey.style";
 import {useDraggable} from '@dnd-kit/core';
 
-const Monkey = ({...props}) => {
+const Monkey = ({ id, width, height, image}) => {
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
-    id: props.id,
+    id: id,
   });
 
   const style = transform ? {
@@ -13,9 +13,9 @@ const Monkey = ({...props}) => {
   } : undefined;
 
   return (
-    <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <StyledMonkey/>
-    </button>
+    <StyledMonkeyBtn ref={setNodeRef} style={style} {...listeners} {...attributes}>
+      <StyledMonkey image={image} width={width} height={height}/>
+    </StyledMonkeyBtn>
   );
 };
 

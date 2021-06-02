@@ -17,6 +17,9 @@ const SliderMenu = ({ show }) => {
 
   const handleSelectedMonkey = (monkeyName) => {
     setSelectedMonkey(monkeyName)
+    // Selected monkey will be draggable,
+    // send props to monkey component(maybe)
+    // to make it draggable
   }
   
   return (

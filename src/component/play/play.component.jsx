@@ -9,6 +9,9 @@ import { useDroppable } from "@dnd-kit/core";
 
 const Play = () => {
   const XYmap = [...Array(100).keys()];
+  const [parent, setParent] = useState(null);
+
+  const draggableMonkey = <Monkey id="draggable" />;
   const { isOver, setNodeRef } = useDroppable({
     id: "droppable",
   });
@@ -17,9 +20,7 @@ const Play = () => {
     color: isOver ? "green" : undefined,
   };
 
-  const [parent, setParent] = useState(null);
 
-  const draggableMonkey = <Monkey id="draggable" />;
 
   const handleDragEnd = (event) => {
     const { over } = event;
@@ -29,7 +30,7 @@ const Play = () => {
   return (
     <StyledPlayWrapper>
       <DndContext onDragEnd={handleDragEnd}>
-        {parent === null ? draggableMonkey : null}
+        {/* {parent === null ? draggableMonkey : null} */}
         <StyledMap>
           <XYMap>
             {XYmap.map((id) => {
@@ -42,8 +43,8 @@ const Play = () => {
             })}
           </XYMap>
         </StyledMap>
+      <Menu  parent={parent} draggableMonkey={draggableMonkey}/>
       </DndContext>
-      <Menu />
     </StyledPlayWrapper>
   );
 };

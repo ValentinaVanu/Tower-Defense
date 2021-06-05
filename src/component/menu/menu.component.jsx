@@ -24,7 +24,7 @@ const monkeyTypes = {
   mageMonkey: MageMonkeyImg,
 };
 
-const Menu = () => {
+const Menu = ({ parent, draggableMonkey}) => {
   const dispatch = useDispatch();
   const show = useSelector(({ slider }) => slider.show);
 
@@ -55,26 +55,21 @@ const Menu = () => {
             <MenuIcon />
           </IconButton>
           <SM.StyledFabContainer>
-            {Object.keys(monkeyTypes).map((type, key) => {
-              return (
+            {/* {Object.keys(monkeyTypes).map((type, key) => {
+              return ( */}
                 <Fab
-                  key={key}
-                  onClick={() =>
-                    selectMonkey({ type: type, img: monkeyTypes[type] })
-                  }
+                  // key={key}
+                  // onClick={() =>
+                  //   selectMonkey({ type: type, img: monkeyTypes[type] })
+                  // }
                   color="secondary"
                   aria-label="add"
                   className={classes.fabButton}
                 >
-                  <img
-                    width="50px"
-                    height="50px"
-                    src={monkeyTypes[type]}
-                    alt={type}
-                  />
+                  {parent === null ? draggableMonkey : null}
                 </Fab>
-              );
-            })}
+              {/* ); */}
+            {/* })} */}
           </SM.StyledFabContainer>
           <div className={classes.grow} />
           <IconButton color="inherit">

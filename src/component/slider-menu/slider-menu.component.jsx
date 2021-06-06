@@ -6,29 +6,32 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import { monkeyList } from './config'
+import { monkeyList } from "./config";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedMonkey } from "../../store/slider-menu/slider-menu.action";
 
-
-import * as SS from './slider-menu.style'
+import * as SS from "./slider-menu.style";
 
 const SliderMenu = ({ show }) => {
-  const [selectedMonkey, setSelectedMonkey] = useState()
+  const dispatch = useDispatch();
+  const selectedMonkey = useSelector(({ slider }) => slider.selected);
   const classes = SS.useStyles();
 
-  const handleSelectedMonkey = (monkeyName) => {
-    setSelectedMonkey(monkeyName)
-    // Selected monkey will be draggable,
-    // send props to monkey component(maybe)
-    // to make it draggable
-  }
-  
+  const handleSelectedMonkey = (name) => {
+    dispatch(setSelectedMonkey(name));
+  };
+  console.log(selectedMonkey);
   return (
     <SS.StyledSSPaper show={show}>
       <List className={classes.root}>
-        {monkeyList.map(({name, path, description})=> {
-          return(
+        {monkeyList.map(({ name, image, description }) => {
+          console.log(name);
+          return (
             <Fragment key={name}>
-              <ListItem onClick={() => handleSelectedMonkey(name)} alignItems="flex-start">
+              <ListItem
+                onClick={() => handleSelectedMonkey(name)}
+                alignItems="flex-start"
+              >
                 <ListItemText
                   primary={name}
                   secondary={
@@ -46,11 +49,11 @@ const SliderMenu = ({ show }) => {
                   }
                 />
                 <ListItemAvatar>
-                  <Avatar alt={name} src={path} />
+                  <Avatar alt={name} src={image} />
                 </ListItemAvatar>
               </ListItem>
             </Fragment>
-          )
+          );
         })}
         <Divider variant="inset" component="li" />
       </List>

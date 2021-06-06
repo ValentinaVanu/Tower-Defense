@@ -1,39 +1,30 @@
 import * as constant from './monkey.constant';
 
 const initialState = {
-  coordinate: {
-    x: '0',
-    y: '0',
-  },
-  placed: [],
-  selected: {
-    type: '',
-    img: ''
-  },
+  id: [],
+  // placed: [],
+  // selected: {
+  //   type: '',
+  //   img: ''
+  // },
 }
 
 
 export const monkeyReducer = ( state = initialState, action ) => {
   switch (action.type) {
-    case constant.MONKEY_COORDINATE:
-      return {
-        ...state,
-        coordinate: action.coordinate
-      }
       case constant.SELECT_MONKEY:
         return {
           ...state,
           selected: action.selected
         }
-    case constant.PLACED_MONKEY:
-      return {
-        ...state,
-        placed: [
-          ...state.placed,
-          action.placed
-        ]
-      }
-  
+      case constant.SET_MONKEY_ID: 
+        return {
+          ...state,
+          id: [
+            ...state.id,
+            action.id
+          ]
+        }
     default:
       return state
   }

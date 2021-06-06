@@ -14,6 +14,7 @@ import { setSliderAction } from "../../store/slider-menu/slider-menu.action";
 import { DropDown } from "../drop-down";
 
 import * as SM from "./menu.style";
+import { setMonkeyId } from "../../store/monkey/monkey.action";
 
 // const monkeyTypes = {
 //   dartMonkey: DartMonkeyImg,
@@ -21,18 +22,30 @@ import * as SM from "./menu.style";
 //   mageMonkey: MageMonkeyImg,
 // };
 
+const MONKEY = {
+  DRUID: "DruidMonkey",
+  DART: "DartMonkey",
+  WIZARD: "WizardMonkey",
+};
+
 const Menu = ({ parent, draggableMonkey }) => {
   const dispatch = useDispatch();
   const classes = SM.useStyles();
-  const [show, selected] = useSelector(({ slider }) => [
+  const [show, selected, monkeyId] = useSelector(({ slider, monkey }) => [
     slider.show,
     slider.selected,
+    monkey.id
   ]);
 
   const toggleSliderMenu = () => {
     dispatch(setSliderAction(!show));
   };
 
+  const handleMonkeyId = (e) => {
+    dispatch(setMonkeyId(e.target.id))
+    console.log(e.target.id)
+  }
+console.log(monkeyId)
   return (
     <Fragment>
       <SM.StyledAppBar
@@ -49,17 +62,28 @@ const Menu = ({ parent, draggableMonkey }) => {
           >
             <MenuIcon />
           </IconButton>
-          {selected && (
-            <SM.StyledFabContainer>
-              <Fab
-                color="secondary"
-                aria-label="add"
-                className={classes.fabButton}
-              >
-                {parent === null ? draggableMonkey : null}
-              </Fab>
-            </SM.StyledFabContainer>
-          )}
+          {selected?.map((monkey, key) => {
+            return (
+              <>
+                {monkey === MONKEY.DART && <SM.StyledFabContainer key={key + 1}>
+                  <Fab
+                    color="secondary"
+                    aria-label="add"
+                    className={classes.fabButton}
+                    id={(new Date()).getTime()}
+                    // I NEVER CLICK HERE!!!
+                    // EACH MONKEY GETS AND ID'
+                    // I NOW NEED to check THIS id WITH THE
+                    // monkey BEING DRAGGED
+                    // onClick={(e) => console.log('wtf?')}
+                    key={key + 1}
+                  >
+                    {parent === null ? draggableMonkey : null}
+                  </Fab>
+                </SM.StyledFabContainer>}
+              </>
+            );
+          })}
           <div className={classes.grow} />
           <IconButton color="inherit">
             <SearchIcon />

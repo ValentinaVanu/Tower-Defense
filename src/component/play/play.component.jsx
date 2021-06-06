@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Map } from "../map";
 import { Menu } from "../menu";
-import { Monkey } from "../monkey/monkey.component";
+import { Monkey } from '../Monkey'
 import { StyledPlayWrapper } from "./play.style";
 import { DndContext } from "@dnd-kit/core";
 import { StyledMap, XYMap } from "../map/map.style";

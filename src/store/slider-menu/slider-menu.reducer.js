@@ -2,10 +2,10 @@ import * as constant from "./slider-menu.constant";
 
 const initialState = {
   show: false,
-  selected: "",
+  selected: [],
 };
-
 export const sliderReducer = (state = initialState, action) => {
+  console.log(state.selected)
   switch (action.type) {
     case constant.SET_SLIDER:
       return {
@@ -15,7 +15,10 @@ export const sliderReducer = (state = initialState, action) => {
     case constant.SELECTED_MONKEY:
       return {
         ...state,
-        selected: action.selected,
+        selected: [
+          ...state.selected,
+          action.selected,
+        ],
       };
     default:
       return state;

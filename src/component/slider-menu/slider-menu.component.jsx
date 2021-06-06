@@ -20,12 +20,11 @@ const SliderMenu = ({ show }) => {
   const handleSelectedMonkey = (name) => {
     dispatch(setSelectedMonkey(name));
   };
-  console.log(selectedMonkey);
+
   return (
     <SS.StyledSSPaper show={show}>
       <List className={classes.root}>
         {monkeyList.map(({ name, image, description }) => {
-          console.log(name);
           return (
             <Fragment key={name}>
               <ListItem

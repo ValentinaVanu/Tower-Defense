@@ -5,17 +5,17 @@ import MageMonkey from '../../image/MageMonkey.webp'
 export const monkeyList = [
   {
     name: 'DartMonkey',
-    path: `${DartMonkey}`,
+    image: `${DartMonkey}`,
     description: 'Throws darts'
   },
   {
     name: 'DruidMonkey',
-    path: `${DruidMonkey}`,
+    image: `${DruidMonkey}`,
     description: 'Nature Power'
   },
   {
     name: 'MageMonkey',
-    path: `${MageMonkey}`,
+    image: `${MageMonkey}`,
     description: 'Spiritual Monkey'
   }
 ]

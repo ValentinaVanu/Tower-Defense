@@ -1,8 +1,8 @@
 import * as constant from './monkey.constant';
 
-export const setMonkeyCoordinateAction = (coordinate) => ({
-  type: constant.MONKEY_COORDINATE,
-  coordinate
+export const setMonkeyId = id => ({
+  type: constant.SET_MONKEY_ID,
+  id
 })
 
 export const setSelectedMonkeyAction = selected => ({

@@ -41,7 +41,6 @@ export const ParallaxContainer = () => {
           factor={3}
           className={classes.dartMonkeyLayer}
         />
-
         <ParallaxLayer
           offset={1.3}
           speed={-0.3}

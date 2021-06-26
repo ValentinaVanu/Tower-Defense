@@ -1,1 +1,1 @@
-export { BlueButton } from './button.component'
+export { BlueButton } from './Button.jsx'

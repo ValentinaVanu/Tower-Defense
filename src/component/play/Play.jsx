@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Map } from "../map";
-import { Menu } from "../menu";
+import { Map } from "../Map";
+import { Menu } from "../Menu";
 import { Monkey } from '../Monkey'
-import { StyledPlayWrapper } from "./play.style";
+import { StyledPlayWrapper } from "./Play.style";
 import { DndContext } from "@dnd-kit/core";
-import { StyledMap, XYMap } from "../map/map.style";
+import { StyledMap, XYMap } from "../Map/Map.style";
 import { useDroppable } from "@dnd-kit/core";
 
 const Play = () => {

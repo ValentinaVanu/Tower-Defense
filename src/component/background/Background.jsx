@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledBackground } from './background.style';
+import { StyledBackground } from './Background.style';
 
 const Background = ({ children }) => {
   return (

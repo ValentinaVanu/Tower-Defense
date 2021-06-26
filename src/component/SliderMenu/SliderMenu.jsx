@@ -10,7 +10,7 @@ import { monkeyList } from "./config";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedMonkey } from "../../store/slider-menu/slider-menu.action";
 
-import * as SS from "./slider-menu.style";
+import * as SS from "./SliderMenustyle";
 
 const SliderMenu = ({ show }) => {
   const dispatch = useDispatch();

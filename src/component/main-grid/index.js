@@ -1,1 +1,0 @@
-export { MainGrid } from './main-grid.component';

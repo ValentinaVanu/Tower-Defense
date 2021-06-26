@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledMonkey, StyledMonkeyBtn } from "./monkey.style";
+import { StyledMonkey, StyledMonkeyBtn } from "./Monkey.style";
 import {useDraggable} from '@dnd-kit/core';
 
 const Monkey = ({ id, width, height, image}) => {

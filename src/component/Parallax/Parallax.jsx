@@ -47,15 +47,17 @@ export const ParallaxContainer = () => {
           speed={-0.3}
           style={{ pointerEvents: "none" }}
         >
-          <img src={MageMonkey} className={classes.mageMonkeyLayer} />
+          <img src={MageMonkey} className={classes.mageMonkeyLayer} alt="Monkey"/>
         </ParallaxLayer>
 
         <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
           <img
+            alt="Monkey"
             src={DruidMonkey}
             style={{ display: "block", width: "20%", marginLeft: "55%" }}
           />
           <img
+            alt="Monkey"
             src={GlueGunner}
             style={{ display: "block", width: "10%", marginLeft: "15%" }}
           />
@@ -64,10 +66,12 @@ export const ParallaxContainer = () => {
         <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
           <img
             src={MageMonkey}
+            alt="Monkey"
             style={{ display: "block", width: "20%", marginLeft: "70%" }}
           />
           <img
             src={DartMonkey}
+            alt="Monkey"
             style={{ display: "block", width: "20%", marginLeft: "40%" }}
           />
         </ParallaxLayer>
@@ -75,10 +79,12 @@ export const ParallaxContainer = () => {
         <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
           <img
             src={DartMonkey}
+            alt="Monkey"
             style={{ display: "block", width: "10%", marginLeft: "10%" }}
           />
           <img
             src={DruidMonkey}
+            alt="Monkey"
             style={{ display: "block", width: "20%", marginLeft: "75%" }}
           />
         </ParallaxLayer>
@@ -86,14 +92,17 @@ export const ParallaxContainer = () => {
         <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
           <img
             src={GlueGunner}
+            alt="Monkey"
             style={{ display: "block", width: "20%", marginLeft: "60%" }}
           />
           <img
             src={DartMonkey}
+            alt="Monkey"
             style={{ display: "block", width: "25%", marginLeft: "30%" }}
           />
           <img
             src={DruidMonkey}
+            alt="Monkey"
             style={{ display: "block", width: "10%", marginLeft: "80%" }}
           />
         </ParallaxLayer>
@@ -101,10 +110,12 @@ export const ParallaxContainer = () => {
         <ParallaxLayer offset={2.6} speed={0.4} style={{ opacity: 0.6 }}>
           <img
             src={GlueGunner}
+            alt="Monkey"
             style={{ display: "block", width: "20%", marginLeft: "5%" }}
           />
           <img
             src={DruidMonkey}
+            alt="Monkey"
             style={{ display: "block", width: "15%", marginLeft: "75%" }}
           />
         </ParallaxLayer>
@@ -119,7 +130,7 @@ export const ParallaxContainer = () => {
             pointerEvents: "none",
           }}
         >
-          <img src={MageMonkey} />
+          <img src={MageMonkey} alt="Monkey"/>
         </ParallaxLayer>
 
         <ParallaxLayer

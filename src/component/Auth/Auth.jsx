@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
-import { Background } from "../Background";
-import { AuthProvider } from "../Context/auth-context";
+// import { AuthProvider } from "../Context/auth-context";
 import { LogIn } from "../LogIn";
 // import { LogIn } from "../Login";
-import { SignUp } from "../SignUp/SignUp";
+// import { SignUp } from "../SignUp/SignUp";
 
 
 const Auth = () => {

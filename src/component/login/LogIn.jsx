@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
 import { Formik } from "formik";
-import { validate, initialLogInValues, initialLogInLabels } from "./validation";
+import { validate, initialLogInValues } from "./validation";
 import { MainGrid } from "../MainGrid";
 import { StyledPaper } from "./LogIn.style";
 import { Background } from "../Background";
 import { Button } from "@material-ui/core";
 
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+// import { useAuthState } from "react-firebase-hooks/auth";
+// import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useAuth } from "../Context/auth-context";
 
 import * as SL from "./LogIn.style";
@@ -18,7 +18,6 @@ const LogIn = () => {
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  console.log(emailRef, passwordRef);
 
   async function handleSubmit(e) {
     e.preventDefault();

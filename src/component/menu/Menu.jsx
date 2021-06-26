@@ -7,14 +7,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { SliderMenu } from "../SliderMenu/SliderMenu";
 import { useDispatch, useSelector } from "react-redux";
-import DartMonkeyImg from "../../image/DartMonkey.png";
-import DruidMonkeyImg from "../../image/DruidMonkey.png";
-import MageMonkeyImg from "../../image/MageMonkey.webp";
 import { setSliderAction } from "../../store/slider-menu/slider-menu.action";
 import { DropDown } from "../DropDown";
 
 import * as SM from "./Menu.style";
-import { setMonkeyId } from "../../store/monkey/monkey.action";
+// import { setMonkeyId } from "../../store/monkey/monkey.action";
 
 // const monkeyTypes = {
 //   dartMonkey: DartMonkeyImg,
@@ -41,10 +38,10 @@ const Menu = ({ parent, draggableMonkey }) => {
     dispatch(setSliderAction(!show));
   };
 
-  const handleMonkeyId = (e) => {
-    dispatch(setMonkeyId(e.target.id))
-    console.log(e.target.id)
-  }
+  // const handleMonkeyId = (e) => {
+  //   dispatch(setMonkeyId(e.target.id))
+  //   console.log(e.target.id)
+  // }
 console.log(monkeyId)
   return (
     <Fragment>

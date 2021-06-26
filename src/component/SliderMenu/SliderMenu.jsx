@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
@@ -7,14 +7,14 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { monkeyList } from "./config";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setSelectedMonkey } from "../../store/slider-menu/slider-menu.action";
 
 import * as SS from "./SliderMenustyle";
 
 const SliderMenu = ({ show }) => {
   const dispatch = useDispatch();
-  const selectedMonkey = useSelector(({ slider }) => slider.selected);
+  // const selectedMonkey = useSelector(({ slider }) => slider.selected);
   const classes = SS.useStyles();
 
   const handleSelectedMonkey = (name) => {

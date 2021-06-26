@@ -1,5 +1,5 @@
 import React from "react";
-import { XYCell } from "./map.style";
+import { XYCell } from "./Map.style";
 import { useDroppable } from "@dnd-kit/core";
 
 const Map = ({ id, children }) => {

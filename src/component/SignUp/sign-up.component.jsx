@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Formik } from "formik";
-import { MainGrid } from "../main-grid";
+import { MainGrid } from "../MainGrid";
 import { Button } from "@material-ui/core";
-import { Background } from "../background";
+import { Background } from "../Background";
 import { initialSigninValues, validate } from "./validation";
 import { useAuth } from "../context/auth-context";
 

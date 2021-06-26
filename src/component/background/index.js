@@ -1,1 +1,1 @@
-export { Background } from './background.component';
+export { Background } from './Background';

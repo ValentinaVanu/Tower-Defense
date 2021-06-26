@@ -5,15 +5,15 @@ import Fab from "@material-ui/core/Fab";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { SliderMenu } from "../slider-menu/slider-menu.component";
+import { SliderMenu } from "../SliderMenu/SliderMenu";
 import { useDispatch, useSelector } from "react-redux";
 import DartMonkeyImg from "../../image/DartMonkey.png";
 import DruidMonkeyImg from "../../image/DruidMonkey.png";
 import MageMonkeyImg from "../../image/MageMonkey.webp";
 import { setSliderAction } from "../../store/slider-menu/slider-menu.action";
-import { DropDown } from "../drop-down";
+import { DropDown } from "../DropDown";
 
-import * as SM from "./menu.style";
+import * as SM from "./Menu.style";
 import { setMonkeyId } from "../../store/monkey/monkey.action";
 
 // const monkeyTypes = {

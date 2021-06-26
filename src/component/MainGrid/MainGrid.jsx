@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledMainGrid } from './main-grid.style';
+import { StyledMainGrid } from './MainGrid.style';
 
 const MainGrid = ({ children }) => {
   return (

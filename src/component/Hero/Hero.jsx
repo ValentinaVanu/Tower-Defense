@@ -14,7 +14,7 @@ const Hero = () => {
   const handleVideoEnded = () => {
     setVideoPlay(false);
   };
-  const handleGetStarted = () => navigate("/auth");
+  const handleGetStarted = () => navigate("/logIn");
 
   return (
     <div className={classes.root}>
@@ -48,14 +48,6 @@ const Hero = () => {
           muted={true}
         />
       )}
-      {/* <CardMedia
-        onError={handleImageError}
-        className={classes.root}
-        src={heroVideo}
-        component="iframe"
-        allow="autoPlay"
-        controls
-      /> */}
     </div>
   );
 };

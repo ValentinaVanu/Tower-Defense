@@ -8,6 +8,9 @@ import { Provider } from "react-redux";
 import { Auth } from "../Auth";
 import { ParallaxContainer } from "../Parallax/Parallax";
 import { HomePage } from "../../pages/HomePage/HomePage";
+import { LogIn } from "../LogIn";
+import { SignUp } from "../SignUp/SignUp";
+import { Profile } from "../Profile";
 
 const App = () => {
   return (
@@ -15,13 +18,14 @@ const App = () => {
       <StyledAppWrapper>
         <AuthProvider>
           <StyledRouter>
-            {/* <Home path="/" /> */}
-            <HomePage path="/"/>
-            <ParallaxContainer path='/parallax'/>
-            <Auth path="/auth" />
-            {/* <LogIn path="/login" />
-            <SignUp path="/sign-up" /> */}
-            <Play path="/play" />
+            <HomePage path="/" />
+            <ParallaxContainer path="parallax" />
+            {/* <Auth path="auth"> */}
+              <LogIn path="logIn" />
+              <SignUp path="signUp" />
+              <Profile path="profile" />
+            {/* </Auth> */}
+            <Play path="play" />
           </StyledRouter>
         </AuthProvider>
       </StyledAppWrapper>

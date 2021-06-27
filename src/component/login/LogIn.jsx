@@ -11,27 +11,34 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useAuth } from "../Context/auth-context";
 
 import * as SL from "./LogIn.style";
+import { navigate } from "@reach/router";
 
 const LogIn = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
+  const { login, currentUser} = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-    await login(emailRef.current.value, passwordRef.current.value);
+    // e.preventdefault()
+
+    try {
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+    } catch {
+      setError('Ops, something went wrong')
+    }
     setLoading(false);
+    navigate('/play')
   }
 
   return (
     <Background>
       <MainGrid>
         <StyledPaper elevation={8}>
-          <SL.StyledFormHeader to="/sign-up">Sign Up</SL.StyledFormHeader>
+          <SL.StyledFormHeader to="/signUp">Sign Up</SL.StyledFormHeader>
           <SL.StyledFormTitle>Log In</SL.StyledFormTitle>
           <Formik
             initialValues={initialLogInValues}
@@ -49,6 +56,7 @@ const LogIn = () => {
               setFieldValue,
             }) => (
               <SL.StyledForm onSubmit={handleSubmit}>
+                {currentUser && currentUser.email}
                 <SL.StyledTextField
                   label="E-mail"
                   variant="outlined"
@@ -71,6 +79,7 @@ const LogIn = () => {
                   inputRef={passwordRef}
                 />
                 {errors.password && touched.password && errors.password}
+                {error}
                 <Button variant="contained" type="submit">
                   Log in
                 </Button>

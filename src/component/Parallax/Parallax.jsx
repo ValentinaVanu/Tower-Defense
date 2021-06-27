@@ -28,7 +28,7 @@ export const ParallaxContainer = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "start",
-            color: "#0a8926",
+            color: "#065f1a",
             fontSize: '40px',
             zIndex: 999,
           }}

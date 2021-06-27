@@ -10,14 +10,13 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'column',
-    color: '#3f51b5',
     fontSize: 42,
 
     '&::before': {
       content: '""',
       position: 'absolute',
       zIndex: -1,
-      opacity: 0.5,
+      opacity: 0.2,
       top: 0,
       left: 0,
       height: '100%',
@@ -37,4 +36,9 @@ export const useStyles = makeStyles((theme) => ({
   button: {
     padding: theme.spacing(2)
   },
+  paper: {
+    padding: theme.spacing(0, 4),
+    backgroundColor: 'RGBA(63,140,181,0.32)',
+    color: '#3f51b5',
+  }
 }))

@@ -6,6 +6,8 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
+import { useAuth } from '../Context/auth-context';
+import { navigate } from '@reach/router';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,9 +19,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DropDown = () => {
-  const classes = useStyles();
+  const { currentUser } = useAuth();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
+  const classes = useStyles();
+
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -57,7 +61,7 @@ const DropDown = () => {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
-      >Account
+      >{currentUser.email.split('@')[0]}
       </div>
       <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
         {({ TransitionProps, placement }) => (
@@ -68,7 +72,7 @@ const DropDown = () => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={() => navigate('/profile')}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
                   <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </MenuList>

@@ -2,9 +2,10 @@ import * as yup from "yup";
 require("yup-password")(yup);
 
 export const initialSigninValues = {
-  username: '',
+  // username: '',
   email: '',
   password: '',
+  confirmPassword: '',
 }
 
 export const initialSigninLabels = {
@@ -19,7 +20,7 @@ export const validate = yup.object().shape({
   password: yup
     .string()
     .required("Required!")
-    .min(8, "Too Short!")
+    .min(4, "Too Short!")
     .minLowercase(3, "Should be at least 3 lowercase characters")
     .minUppercase(1, "Should contain at least 1 uppercase")
     .minNumbers(1, "Should contain at least 1 number")

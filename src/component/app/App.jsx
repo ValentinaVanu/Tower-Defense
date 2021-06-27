@@ -7,6 +7,7 @@ import { Play } from "../Play";
 import { Provider } from "react-redux";
 import { Auth } from "../Auth";
 import { ParallaxContainer } from "../Parallax/Parallax";
+import { Hero } from "../Hero";
 
 const App = () => {
   return (
@@ -15,7 +16,8 @@ const App = () => {
         <AuthProvider>
           <StyledRouter>
             {/* <Home path="/" /> */}
-            <ParallaxContainer path='/'/>
+            <Hero path="/"/>
+            <ParallaxContainer path='/parallax'/>
             <Auth path="/auth" />
             {/* <LogIn path="/login" />
             <SignUp path="/sign-up" /> */}

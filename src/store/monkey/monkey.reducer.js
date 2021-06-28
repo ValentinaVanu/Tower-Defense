@@ -2,6 +2,7 @@ import * as constant from './monkey.constant';
 
 const initialState = {
   id: [],
+  activeMonkey: false
   // placed: [],
   // selected: {
   //   type: '',
@@ -15,7 +16,7 @@ export const monkeyReducer = ( state = initialState, action ) => {
       case constant.SELECT_MONKEY:
         return {
           ...state,
-          selected: action.selected
+          activeMonkey: action.selected
         }
       case constant.SET_MONKEY_ID: 
         return {

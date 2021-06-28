@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Fab from "@material-ui/core/Fab";
@@ -11,6 +11,7 @@ import { setSliderAction } from "../../store/slider-menu/slider-menu.action";
 import { DropDown } from "../DropDown";
 
 import * as SM from "./Menu.style";
+import { setSelectedMonkeyAction } from "../../store/monkey/monkey.action";
 // import { setMonkeyId } from "../../store/monkey/monkey.action";
 
 // const monkeyTypes = {
@@ -27,12 +28,12 @@ const MONKEY = {
 
 const Menu = ({ parent, draggableMonkey }) => {
   const dispatch = useDispatch();
-  const classes = SM.useStyles();
-  const [show, selected, monkeyId] = useSelector(({ slider, monkey }) => [
+  const [show, selected] = useSelector(({ slider }) => [
     slider.show,
     slider.selected,
-    monkey.id
   ]);
+  // const [dragActive, setDragActive] = useState(false)
+  const classes = SM.useStyles();
 
   const toggleSliderMenu = () => {
     dispatch(setSliderAction(!show));
@@ -42,7 +43,12 @@ const Menu = ({ parent, draggableMonkey }) => {
   //   dispatch(setMonkeyId(e.target.id))
   //   console.log(e.target.id)
   // }
-console.log(monkeyId)
+  const handleSelectedMonkey = (e, selectedId) => {
+    setSelectedMonkeyAction(+e.target.id === selectedId);
+    console.log(+e.target.id === selectedId);
+  };
+
+  // console.log(selected.map(x =>x).map(y => y));
   return (
     <Fragment>
       <SM.StyledAppBar
@@ -60,24 +66,33 @@ console.log(monkeyId)
             <MenuIcon />
           </IconButton>
           {selected?.map((monkey, key) => {
+            // console.log(selectedName)
             return (
               <>
-                {monkey === MONKEY.DART && <SM.StyledFabContainer key={key + 1}>
-                  <Fab
-                    color="secondary"
-                    aria-label="add"
-                    className={classes.fabButton}
-                    id={(new Date()).getTime()}
-                    // I NEVER CLICK HERE!!!
-                    // EACH MONKEY GETS AND ID'
-                    // I NOW NEED to check THIS id WITH THE
-                    // monkey BEING DRAGGED
-                    // onClick={(e) => console.log('wtf?')}
+                {monkey.selectedName === MONKEY.DART && (
+                  <SM.StyledFabContainer
                     key={key + 1}
-                  >
-                    {parent === null ? draggableMonkey : null}
-                  </Fab>
-                </SM.StyledFabContainer>}
+                    id={monkey.selectedId}
+                    // onClick={(e) => handleSelectedMonkey(e)}
+                    onMouseEnter={(e) => handleSelectedMonkey(e, monkey.selectedId)}
+                    // onMouseLeave={content.back && !isMobile ? handleClose : null}              
+                    // onClick={(e) => console.log(+e.target.id, monkey.selectedId)}
+                    >
+                    <Fab
+                      color="secondary"
+                      aria-label="add"
+                      className={classes.fabButton}
+                      // id={(new Date()).getTime()}
+                      // I NEVER CLICK HERE!!!
+                      // EACH MONKEY GETS AND ID'
+                      // I NOW NEED to check THIS id WITH THE
+                      // monkey BEING DRAGGED
+                      key={key + 1}
+                    >
+                      {parent === null ? draggableMonkey : null}
+                    </Fab>
+                  </SM.StyledFabContainer>
+                )}
               </>
             );
           })}

@@ -3,7 +3,7 @@ import { StyledMonkey, StyledMonkeyBtn } from "./Monkey.style";
 import {useDraggable} from '@dnd-kit/core';
 
 const Monkey = ({ id, width, height, image}) => {
-  const {attributes, listeners, setNodeRef, transform} = useDraggable({
+  const {attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
   });
 

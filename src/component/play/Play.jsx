@@ -11,9 +11,8 @@ import { useSelector } from "react-redux";
 const Play = () => {
   const XYmap = [...Array(100).keys()];
   const [parent, setParent] = useState(null);
-  const activeMonkey = useSelector(({ monkey }) => monkey.activeMonkey)
 
-  const draggableMonkey = <Monkey id="draggable" />;
+  const draggableMonkey = <Monkey id= {"draggable"} />;
   const { isOver, setNodeRef } = useDroppable({
     id: "droppable",
   });
@@ -27,20 +26,18 @@ const Play = () => {
   const handleDragEnd = (event) => {
     const { over } = event;
     setParent(over ? over.id : null);
-    // console.log('over:', over,'isOver:', isOver)
   };
 
   return (
     <StyledPlayWrapper>
       <DndContext onDragEnd={handleDragEnd}>
-        {/* {parent === null ? draggableMonkey : null} */}
         <StyledMap>
           <XYMap>
             {XYmap.map((id) => {
               return (
                 <Map key={id} id={id} style={style} ref={setNodeRef}>
                   {id}
-                  {parent === id && activeMonkey ? draggableMonkey : "Drop here"}
+                  {parent === id  ? draggableMonkey : "Drop here"}
                 </Map>
               );
             })}

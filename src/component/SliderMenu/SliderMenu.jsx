@@ -7,7 +7,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { monkeyList } from "./config";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import * as SS from "./SliderMenustyle";
 import { setMonkeyId } from "../../store/monkey/monkey.action";
@@ -15,14 +15,12 @@ import { setSelectedMonkey } from "../../store/slider-menu/slider-menu.action";
 
 const SliderMenu = ({ show }) => {
   const dispatch = useDispatch();
-  const [selectedMonkey, monkeyId] = useSelector(({ slider, monkey }) => [slider.selected, monkey.id]);
   const classes = SS.useStyles();
 
   const handleSelectedMonkey = (selectedName) => {
     let selectedId =  Math.floor(Math.random() * 99)
     dispatch(setSelectedMonkey(selectedName, selectedId));
     dispatch(setMonkeyId(Math.floor(Math.random() * 99)))
-    // console.log(selectedName)
   };
   return (
     <SS.StyledSSPaper show={show}>

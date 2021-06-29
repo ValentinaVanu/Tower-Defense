@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Fab from "@material-ui/core/Fab";
@@ -11,8 +11,6 @@ import { setSliderAction } from "../../store/slider-menu/slider-menu.action";
 import { DropDown } from "../DropDown";
 
 import * as SM from "./Menu.style";
-import { setSelectedMonkeyAction } from "../../store/monkey/monkey.action";
-// import { setMonkeyId } from "../../store/monkey/monkey.action";
 
 // const monkeyTypes = {
 //   dartMonkey: DartMonkeyImg,
@@ -32,23 +30,13 @@ const Menu = ({ parent, draggableMonkey }) => {
     slider.show,
     slider.selected,
   ]);
-  // const [dragActive, setDragActive] = useState(false)
   const classes = SM.useStyles();
 
   const toggleSliderMenu = () => {
     dispatch(setSliderAction(!show));
   };
 
-  // const handleMonkeyId = (e) => {
-  //   dispatch(setMonkeyId(e.target.id))
-  //   console.log(e.target.id)
-  // }
-  const handleSelectedMonkey = (e, selectedId) => {
-    setSelectedMonkeyAction(+e.target.id === selectedId);
-    console.log(+e.target.id === selectedId);
-  };
 
-  // console.log(selected.map(x =>x).map(y => y));
   return (
     <Fragment>
       <SM.StyledAppBar
@@ -66,27 +54,19 @@ const Menu = ({ parent, draggableMonkey }) => {
             <MenuIcon />
           </IconButton>
           {selected?.map((monkey, key) => {
-            // console.log(selectedName)
             return (
               <>
                 {monkey.selectedName === MONKEY.DART && (
                   <SM.StyledFabContainer
                     key={key + 1}
+                    styles={{PointerEvent: 'none'}}
                     id={monkey.selectedId}
-                    // onClick={(e) => handleSelectedMonkey(e)}
-                    onMouseEnter={(e) => handleSelectedMonkey(e, monkey.selectedId)}
-                    // onMouseLeave={content.back && !isMobile ? handleClose : null}              
-                    // onClick={(e) => console.log(+e.target.id, monkey.selectedId)}
                     >
                     <Fab
+                      id={monkey.selectedId}
                       color="secondary"
                       aria-label="add"
                       className={classes.fabButton}
-                      // id={(new Date()).getTime()}
-                      // I NEVER CLICK HERE!!!
-                      // EACH MONKEY GETS AND ID'
-                      // I NOW NEED to check THIS id WITH THE
-                      // monkey BEING DRAGGED
                       key={key + 1}
                     >
                       {parent === null ? draggableMonkey : null}

@@ -5,12 +5,8 @@ export const setMonkeyId = id => ({
   id
 })
 
-export const setSelectedMonkeyAction = bool => ({
+export const setSelectedMonkeyAction = activeMonkey => ({
   type: constant.SELECT_MONKEY,
-  bool
+  activeMonkey
 })
 
-// export const setPlacedMonkeyAction = placed => ({
-//   type: constant.PLACED_MONKEY,
-//   placed
-// })

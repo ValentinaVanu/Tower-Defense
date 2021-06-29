@@ -16,7 +16,7 @@ export const monkeyReducer = ( state = initialState, action ) => {
       case constant.SELECT_MONKEY:
         return {
           ...state,
-          activeMonkey: action.selected
+          activeMonkey: action.activeMonkey
         }
       case constant.SET_MONKEY_ID: 
         return {

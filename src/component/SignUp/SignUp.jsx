@@ -7,7 +7,7 @@ import { initialSigninValues, validate } from "./validation";
 import { useAuth } from "../Context/auth-context";
 
 import * as SS from "./SignUp.styles";
-import { auth } from "../../config/firestore";
+// import { auth } from "../../config/firestore";
 import { navigate } from "@reach/router";
 
 const SignUp = () => {

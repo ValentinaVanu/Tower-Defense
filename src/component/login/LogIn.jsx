@@ -1,15 +1,15 @@
 import React, { useRef, useState } from "react";
 import { Field, Formik } from "formik";
 import { validate, initialLogInValues } from "./validation";
+import { navigate } from "@reach/router";
+import { useAuth } from "../Context/auth-context";
 import { MainGrid } from "../MainGrid";
 import { StyledPaper } from "./LogIn.style";
 import { Background } from "../Background";
 import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
 
-import { useAuth } from "../Context/auth-context";
 
 import * as SL from "./LogIn.style";
-import { navigate } from "@reach/router";
 
 const LogIn = () => {
   const emailRef = useRef();

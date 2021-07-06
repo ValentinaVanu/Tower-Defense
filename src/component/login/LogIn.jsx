@@ -1,13 +1,11 @@
 import React, { useRef, useState } from "react";
-import { Formik } from "formik";
-import { validate, initialLogInValues, initialLogInLabels } from "./validation";
+import { Field, Formik } from "formik";
+import { validate, initialLogInValues } from "./validation";
 import { MainGrid } from "../MainGrid";
 import { StyledPaper } from "./LogIn.style";
 import { Background } from "../Background";
-import { Button } from "@material-ui/core";
+import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
 
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useAuth } from "../Context/auth-context";
 
 import * as SL from "./LogIn.style";
@@ -16,7 +14,7 @@ import { navigate } from "@reach/router";
 const LogIn = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, currentUser} = useAuth();
+  const { login, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -28,10 +26,10 @@ const LogIn = () => {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
     } catch {
-      setError('Ops, something went wrong')
+      setError("Ops, something went wrong");
     }
     setLoading(false);
-    navigate('/play')
+    navigate("/play");
   }
 
   return (
@@ -45,38 +43,30 @@ const LogIn = () => {
             validationSchema={validate}
             onSubmit={handleSubmit}
           >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-              setFieldValue,
-            }) => (
+            {({ errors, touched, handleSubmit }) => (
               <SL.StyledForm onSubmit={handleSubmit}>
                 {currentUser && currentUser.email}
-                <SL.StyledTextField
+                <Field
+                  as={SL.StyledTextField}
                   label="E-mail"
                   variant="outlined"
                   type="email"
                   name="email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
                   inputRef={emailRef}
                 />
                 {errors.email && touched.email && errors.email}
-                <SL.StyledTextField
+                <Field
+                  as={SL.StyledTextField}
                   label="Password"
                   variant="outlined"
                   type="password"
                   name="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
                   inputRef={passwordRef}
+                />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  color="primary"
+                  label="Accept Terms and Conditions"
                 />
                 {errors.password && touched.password && errors.password}
                 {error}

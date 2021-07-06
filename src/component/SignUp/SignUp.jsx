@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
 import { MainGrid } from "../MainGrid";
 import { Button } from "@material-ui/core";
 import { Background } from "../Background";
@@ -17,12 +17,11 @@ const SignUp = () => {
   const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const usernameRef = useRef();
 
   async function handleSigninSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     if (passwordRef.current.value !== passworConfirmRef.current.value) {
-      return setError('Passwords do not Match')
+      return setError("Passwords do not Match");
     }
     try {
       console.log("a mers");
@@ -33,7 +32,7 @@ const SignUp = () => {
       setError("Failed to log in");
     }
     setLoading(false);
-    navigate('/logIn')
+    navigate("/logIn");
   }
 
   return (
@@ -47,64 +46,36 @@ const SignUp = () => {
             validationSchema={validate}
             onSubmit={handleSigninSubmit}
           >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              isValid,
-              handleSubmit,
-              isSubmitting,
-              setFieldValue,
-            }) => (
-              <SS.StyledForm onSubmit={handleSigninSubmit}>
+            {({ values, errors }) => (
+              <SS.StyledForm>
                 {currentUser && currentUser.email}
-                {/* <SS.StyledTextField
-                  label="Username"
-                  variant="outlined"
-                  type="text"
-                  name="username"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.Username}
-                  inputRef={emailRef}
-                /> */}
-                <SS.StyledTextField
+                <Field
                   label="E-mail"
                   variant="outlined"
                   type="email"
                   name="email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
+                  as={SS.StyledTextField}
                   inputRef={emailRef}
                 />
-                <SS.StyledTextField
+                <Field
+                  as={SS.StyledTextField}
                   label="Password"
                   variant="outlined"
                   type="password"
                   name="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
                   inputRef={passwordRef}
                 />
-                <SS.StyledTextField
+                <Field
+                  as={SS.StyledTextField}
                   label="Confirm Password"
                   variant="outlined"
                   type="password"
                   name="confirmPassword"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.confirmPassword}
                   inputRef={passworConfirmRef}
                 />
-                  {error && <span>{error}</span>}
-                <Button
-                  variant="contained"
-                  type="submit"
-                >
+                {error && <span>{error}</span>}
+                {console.log(values)}
+                <Button variant="contained" type="submit">
                   Submit
                 </Button>
                 <SS.StyledLink to="/">Go back</SS.StyledLink>
@@ -117,4 +88,4 @@ const SignUp = () => {
   );
 };
 
-export { SignUp }
+export { SignUp };

@@ -3,6 +3,7 @@ import { useAuth } from '../Context/auth-context';
 import { navigate } from '@reach/router';
 import { Button, Typography } from '@material-ui/core';
 import { StyledPaper } from '../LogIn/LogIn.style'
+import { useEffect } from 'react';
 
 const Profile = () => {
   const { currentUser , logout} = useAuth();

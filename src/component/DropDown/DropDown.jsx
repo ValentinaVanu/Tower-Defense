@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
@@ -8,6 +8,7 @@ import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth } from '../Context/auth-context';
 import { navigate } from '@reach/router';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,11 +20,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DropDown = () => {
-  const { currentUser } = useAuth();
-  const [open, setOpen] = React.useState(false);
+  const { currentUser,logout } = useAuth();
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState('')
   const anchorRef = React.useRef(null);
   const classes = useStyles();
 
+  useEffect(() => {
+
+  },[currentUser])
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -37,10 +42,21 @@ const DropDown = () => {
     setOpen(false);
   };
 
-  function handleListKeyDown(event) {
+  const handleListKeyDown = (event) => {
     if (event.key === 'Tab') {
       event.preventDefault();
       setOpen(false);
+    }
+  }
+
+  async function handleLogout() {
+    setError("")
+
+    try {
+      await logout()
+      navigate('/')
+    } catch {
+      setError("Failed to log out")
     }
   }
 
@@ -56,13 +72,13 @@ const DropDown = () => {
 
   return (
     <div className={classes.root}>
-      <div
+      {currentUser && <div
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
       >{currentUser.email.split('@')[0]}
-      </div>
+      </div>}
       <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
         {({ TransitionProps, placement }) => (
           <Grow
@@ -74,7 +90,7 @@ const DropDown = () => {
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                   <MenuItem onClick={() => navigate('/profile')}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>

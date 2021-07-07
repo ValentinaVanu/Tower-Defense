@@ -22,9 +22,9 @@ export const PrettyAccordion = ({ config }) => {
 
   return (
     <div className={classes.root}>
-      {config.map(({ title, description }) => {
+      {config.map(({ title, description }, key) => {
         return (
-          <Accordion>
+          <Accordion key={key}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"

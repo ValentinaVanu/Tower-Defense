@@ -1,6 +1,5 @@
-import { Button } from '@material-ui/core';
 import React from 'react';
-import { StyledBlueButton } from './button.style';
+import { StyledBlueButton } from './Button.style';
 
 
 const BlueButton = ({ props, label, onClick }) => {

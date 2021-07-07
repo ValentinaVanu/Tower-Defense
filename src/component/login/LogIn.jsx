@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Field, Formik } from "formik";
 import { validate, initialLogInValues } from "./validation";
 import { navigate } from "@reach/router";
-import { useAuth } from "../Context/auth-context";
+import { useAuth } from "../Context/AuthContext";
 import { MainGrid } from "../MainGrid";
 import { StyledPaper } from "./LogIn.style";
 import { Background } from "../Background";

@@ -6,7 +6,7 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
-import { useAuth } from '../Context/auth-context';
+import { useAuth } from '../Context/AuthContext';
 import { navigate } from '@reach/router';
 import { useEffect } from 'react';
 

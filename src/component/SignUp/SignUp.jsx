@@ -4,10 +4,9 @@ import { MainGrid } from "../MainGrid";
 import { Button } from "@material-ui/core";
 import { Background } from "../Background";
 import { initialSigninValues, validate } from "./validation";
-import { useAuth } from "../Context/auth-context";
+import { useAuth } from "../Context/AuthContext";
 
 import * as SS from "./SignUp.styles";
-// import { auth } from "../../config/firestore";
 import { navigate } from "@reach/router";
 
 const SignUp = () => {

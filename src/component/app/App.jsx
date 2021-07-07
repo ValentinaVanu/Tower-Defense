@@ -1,6 +1,6 @@
 import React from "react";
 import store from "../../store";
-import { AuthProvider } from "../Context/auth-context";
+import { AuthProvider } from "../Context/AuthContext";
 import { StyledAppWrapper, StyledRouter } from "./App.style";
 import { Play } from "../Play";
 import { Provider } from "react-redux";

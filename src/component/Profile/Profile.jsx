@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAuth } from '../Context/auth-context';
+import { useAuth } from '../Context/AuthContext';
 import { navigate } from '@reach/router';
 import { Button, Typography } from '@material-ui/core';
 import { StyledPaper } from '../LogIn/LogIn.style'

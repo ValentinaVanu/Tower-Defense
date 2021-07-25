@@ -9,20 +9,25 @@ import { HomePage } from "../../pages/HomePage/HomePage";
 import { LogIn } from "../LogIn";
 import { SignUp } from "../SignUp/SignUp";
 import { Profile } from "../Profile";
+import {
+  createMemorySource,
+  createHistory,
+  LocationProvider,
+} from "@reach/router";
 
 const App = () => {
   return (
     <Provider store={store}>
       <StyledAppWrapper>
         <AuthProvider>
-          <StyledRouter>
-            <HomePage path="/" />
-            <ParallaxContainer path="parallax" />
-              <LogIn path="logIn" />
+            <StyledRouter>
+              <HomePage path="/" />
+              <ParallaxContainer path="parallax" />
+              <LogIn path="/logIn" />
               <SignUp path="signUp" />
               <Profile path="profile" />
-            <Play path="play" />
-          </StyledRouter>
+              <Play path="play" />
+            </StyledRouter>
         </AuthProvider>
       </StyledAppWrapper>
     </Provider>

@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const PrettyAccordion = ({ config }) => {
+  // const [open, setOpen] = useState(false)
   const classes = useStyles();
 
   return (

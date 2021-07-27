@@ -1,15 +1,15 @@
-import React from 'react'
-import { ProfileCard } from './index'
+import React from "react";
+import { ProfileCard } from "./index";
 
 export default {
-  title: 'Components/Profile/ProfileCard',
+  title: "Components/Profile/ProfileCard",
   component: ProfileCard,
-}
+};
 
-const Template = (args) => <ProfileCard {...args}/>
+const Template = (args) => <ProfileCard {...args} />;
 
-export const Card = Template.bind({})
+export const Card = Template.bind({});
 
 Card.parameters = {
-  layout: 'fullscreen',
-}
+  layout: "fullscreen",
+};

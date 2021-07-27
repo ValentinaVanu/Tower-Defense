@@ -1,52 +1,92 @@
-import React from "react";
+import React, { useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { Typography } from "@material-ui/core";
+import PropTypes from "prop-types";
 
-const options = {
-  chart: {
-    type: 'areaspline',
-    zoomType: 'x',
-  },
-  title: {
-    text: "My chart",
-  },
-  xAxis: {
-    categories: [2, 3, 4, 5],
-    crosshair: true,
-  },
-  yAxis: {
-    min: 0,
-  },
-  // series: [
-  //   {
-  //     type: 'area',
-  //     data: [1, 2, 3],
-  //   },
-  // ],
-  series: [
-    {
-      name: 'Total',
-      data: [0, 1, 4, 6, 4, 5, 6, 7, 8],
+const getChartOptions = (data, title) => {
+  return {
+    chart: {
+      type: "areaspline",
+      zoomType: "x",
+      backgroundColor: "rgba(0,0,0,0)",
     },
-    {
-      name: 'Success',
-      data: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-      color: '#43a047',
+    legend: {
+      itemStyle: {
+        color: "#fff",
+        fontWeight: "bold",
+      },
     },
-    {
-      name: 'Fail',
-      data: [0, 1, 4, 6, 2, 1, 0],
-      color: '#ef5350',
+    title: {
+      text: title,
+      style: {
+        color: "rgb(255,255,255)",
+      },
     },
-  ],
+    xAxis: {
+      categories: [2, 3, 4, 5],
+      crosshair: true,
+      labels: {
+        style: {
+          color: "rgb(255,255,255)",
+        },
+      },
+    },
+    yAxis: {
+      min: 0,
+      labels: {
+        style: {
+          color: "rgb(255,255,255)",
+        },
+      },
+    },
+    series: [
+      {
+        name: "Total",
+        data: [0, 1, 4, 6, 4, 5, 6, 7, 8],
+        // marker: { fillColor: '#BF0B23', radius: 10 },
+        style: {
+          color: "rgb(255,255,255)",
+        },
+      },
+      {
+        name: "Win",
+        data: data.win,
+        color: "#717e99",
+        style: {
+          color: "rgb(255,255,255)",
+        },
+      },
+      {
+        name: "Loss",
+        data: data.loss,
+        color: "#a08080",
+        style: {
+          color: "rgb(255,255,255)",
+        },
+      },
+    ],
+  };
 };
 
-export const ProfileChart = ({ win = 12, loss = 4 }) => {
-  const data = [win, loss]
+export const ProfileChart = ({ data, title }) => {
   return (
     <div>
-      Profile Chart {data}
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      <HighchartsReact
+        fillOpacity
+        highcharts={Highcharts}
+        options={getChartOptions(data, title)}
+      />
     </div>
   );
+};
+
+ProfileChart.defaultProps = {
+  title: "Title",
+  data: { win: [0, 1, 2, 3, 4, 5, 6, 7, 8], loss: [0, 1, 4, 6, 2, 1, 0] },
+};
+
+ProfileChart.propTypes = {
+  title: PropTypes.string,
+  data: PropTypes.object,
 };

@@ -1,34 +1,52 @@
-import React, { useState } from 'react'
-import { useAuth } from '../Context/AuthContext';
-import { navigate } from '@reach/router';
-import { Button, Typography } from '@material-ui/core';
-import { StyledPaper } from '../LogIn/LogIn.style'
-import { useEffect } from 'react';
+import React, { useState } from "react";
+import { useAuth } from "../Context/AuthContext";
+import { navigate } from "@reach/router";
+import { Button, Typography } from "@material-ui/core";
+import { ProfileChart } from "../Chart/Chart";
+import { ProfileCard } from "./ProfileCard";
+
+import { useStyles } from './Profile.styles'
 
 const Profile = () => {
-  const { currentUser , logout} = useAuth();
-  const [error, setError] = useState('')
+  const { currentUser, logout } = useAuth()
+  const [error, setError] = useState("")
+  const classes = useStyles()
 
   async function handleLogout() {
-    setError("")
+    setError("");
 
     try {
-      await logout()
-      navigate('/')
+      await logout();
+      navigate("/");
     } catch {
-      setError("Failed to log out")
+      setError("Failed to log out");
     }
   }
 
-
   return (
-    <StyledPaper>
-      <Typography variant="h2">Profile</Typography>
-      {currentUser && <Typography varinat="h4">Email: {currentUser.email}</Typography>}
-      <Button variant="outlined" color="primary" onClick={handleLogout}>Log Out</Button>
+    <div className={classes.root}>
+      <header className={classes.header}>
+        {/* {currentUser &&  */}
+        <Typography variant="h3">{currentUser}'s profile</Typography>
+        {/* } */}
+        {currentUser && (
+          <Typography varinat="h4">Email: {currentUser.email}</Typography>
+        )}
+        <Button  className={classes.logout} variant="outlined" color="primary" onClick={handleLogout}>
+          Log Out
+        </Button>
+      </header>
       {error && <Typography varinat="body1">{error}</Typography>}
-    </StyledPaper>
-  )
-}
+      <div className={classes.cardSection}>
+        <ProfileCard>
+          <ProfileChart />
+        </ProfileCard>
+        <ProfileCard>
+          List of Monkey Cards You Own
+        </ProfileCard>
+      </div>
+    </div>
+  );
+};
 
-export { Profile }
+export { Profile };

@@ -15,12 +15,8 @@ const Profile = () => {
   const classes = useStyles();
 
   const logOut = () => {
-    try {
       dispatch(logoutAction());
       navigate("/logIn");
-    } catch(error) {
-      setError(error)
-    }
   };
 
   console.log(userData);

@@ -5,8 +5,12 @@ import { navigate } from "@reach/router";
 import { MainGrid } from "../MainGrid";
 import { StyledPaper } from "./LogIn.style";
 import { Background } from "../Background";
-import { Button, Checkbox, FormControlLabel, Typography } from "@material-ui/core";
-
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Typography,
+} from "@material-ui/core";
 
 import * as SL from "./LogIn.style";
 import { useDispatch } from "react-redux";
@@ -14,36 +18,33 @@ import { setUserAction } from "../../store/auth/auth.action";
 import { auth, GitHubProvider } from "../../config/firestore";
 
 const LogIn = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [error, setError] = useState("");
   // const [loading, setLoading] = useState(false);
 
   const handleSignInWithGitHub = async () => {
-    try{
-      const { user: { uid, displayName, photoURL, email } } = await auth.signInWithPopup(GitHubProvider)
-      console.log(uid, displayName, photoURL, email)
-      dispatch(setUserAction({uid, displayName, photoURL, email}))
-      navigate("/profile")
+    try {
+      const {
+        user: { uid, displayName, photoURL, email },
+      } = await auth.signInWithPopup(GitHubProvider);
+      dispatch(setUserAction({ uid, displayName, photoURL, email }));
+      navigate("/profile");
     } catch (error) {
-      console.log(error,"ops")
+      console.log(error, "ops");
     }
-  }
+  };
 
   const handleSignInWithEmail = async (values) => {
     try {
       setError("");
       // setLoading(true);
-      await auth.createUserWithEmailAndPassword(
-        values.email, values.password
-        )
+      await auth.createUserWithEmailAndPassword(values.email, values.password);
     } catch {
       setError("Ops, something went wrong");
     }
     // setLoading(false);
     // navigate("/play");
-  }
-
-
+  };
 
   return (
     <Background>
@@ -51,13 +52,15 @@ const LogIn = () => {
         <StyledPaper elevation={8}>
           <SL.StyledFormHeader to="/signUp">Sign Up</SL.StyledFormHeader>
           <SL.StyledFormTitle>Log In</SL.StyledFormTitle>
-          <Typography onClick={handleSignInWithGitHub}>Sign ip with Github</Typography>
+          <Typography onClick={handleSignInWithGitHub}>
+            Sign in with Github
+          </Typography>
           <Formik
             initialValues={initialLogInValues}
             validationSchema={validate}
             onSubmit={handleSignInWithEmail}
           >
-            {({ errors, touched, handleSubmit, values }) => (
+            {({ errors, touched }) => (
               <SL.StyledForm onSubmit={handleSignInWithEmail}>
                 <Field
                   as={SL.StyledTextField}
@@ -72,7 +75,6 @@ const LogIn = () => {
                   label="Password"
                   name="password"
                   variant="outlined"
-                  values={values.password}
                   type="password"
                 />
                 <FormControlLabel

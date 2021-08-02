@@ -8,22 +8,30 @@ import { initialSigninValues, validate } from "./validation";
 import * as SS from "./SignUp.styles";
 import { navigate } from "@reach/router";
 import { auth } from "../../config/firestore";
+import { useDispatch } from "react-redux";
+import { setUserAction } from "../../store/auth/auth.action";
 
 const SignUp = () => {
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
   // const [loading, setLoading] = useState(false);
 
   const onSubmit = async (values) => {
-    try {
-      await auth.createUserWithEmailAndPassword(values.email, values.password)
-      if( values.password !== values.confirmPassword) {
-        return setError("Passwords do not Match")
-      }
-    } catch (error) {
-      setError("Failed to log in")
-    }
-    navigate("/logIn")
-  }
+    const {
+      user: { uid, displayName, photoURL, email },
+    } = await auth
+      .createUserWithEmailAndPassword(values.email, values.password)
+      .then((result) => {
+        dispatch(setUserAction({ uid, displayName, photoURL, email }));
+        if (values.password !== values.confirmPassword) {
+          return setError("Passwords do not Match");
+        }
+      })
+      .catch((error) => {
+        setError("Failed to log in", error);
+      });
+    navigate("/logIn");
+  };
 
   return (
     <Background>
@@ -36,13 +44,15 @@ const SignUp = () => {
             validationSchema={validate}
             onSubmit={onSubmit}
           >
-            {({ values, errors }) => (
-              <SS.StyledForm>
+            {({ errors, isValid, values }) => (
+              <SS.StyledForm onSubmit={() => onSubmit(values)}>
+                {console.log(values, " IN FORM")}
                 <Field
                   label="E-mail"
                   variant="outlined"
                   type="email"
                   name="email"
+                  values={values.email}
                   as={SS.StyledTextField}
                 />
                 <Field
@@ -50,6 +60,7 @@ const SignUp = () => {
                   label="Password"
                   variant="outlined"
                   type="password"
+                  values={values.password}
                   name="password"
                 />
                 <Field
@@ -60,8 +71,12 @@ const SignUp = () => {
                   name="confirmPassword"
                 />
                 {error && <span>{error}</span>}
-                {console.log(values)}
-                <Button variant="contained" type="submit">
+                <Button
+                  color="primary"
+                  disabled={isValid}
+                  variant="contained"
+                  type="submit"
+                >
                   Submit
                 </Button>
                 <SS.StyledLink to="/">Go back</SS.StyledLink>

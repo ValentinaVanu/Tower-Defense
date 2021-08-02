@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
 
 const getChartOptions = (data, title) => {

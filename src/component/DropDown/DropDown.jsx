@@ -8,7 +8,8 @@ import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth } from '../Context/AuthContext';
 import { navigate } from '@reach/router';
-import { useEffect } from 'react';
+import { Typography } from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,16 +20,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const DropDown = () => {
-  const { currentUser,logout } = useAuth();
+  const { currentUser, logout } = useAuth();
   const [open, setOpen] = useState(false);
   const [error, setError] = useState('')
   const anchorRef = React.useRef(null);
   const classes = useStyles();
-
-  useEffect(() => {
-
-  },[currentUser])
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -72,6 +70,7 @@ const DropDown = () => {
 
   return (
     <div className={classes.root}>
+      {error && <Typography>{error}</Typography>}
       {currentUser && <div
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}

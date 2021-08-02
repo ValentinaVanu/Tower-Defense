@@ -1,38 +1,46 @@
 import React, { useState } from "react";
-import { useAuth } from "../Context/AuthContext";
 import { navigate } from "@reach/router";
 import { Button, Typography } from "@material-ui/core";
 import { ProfileChart } from "../Chart/Chart";
 import { ProfileCard } from "./ProfileCard";
 
-import { useStyles } from './Profile.styles'
+import { useStyles } from "./Profile.styles";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAction } from "../../store/auth/auth.action";
 
 const Profile = () => {
-  const { currentUser, logout } = useAuth()
-  const [error, setError] = useState("")
-  const classes = useStyles()
+  const userData = useSelector(({ auth }) => auth.user);
+  const dispatch = useDispatch();
+  const [error, setError] = useState("");
+  const classes = useStyles();
 
-  async function handleLogout() {
-    setError("");
-
+  const logOut = () => {
     try {
-      await logout();
-      navigate("/");
-    } catch {
-      setError("Failed to log out");
+      dispatch(logoutAction());
+      navigate("/logIn");
+    } catch(error) {
+      setError(error)
     }
-  }
+  };
 
+  console.log(userData);
   return (
     <div className={classes.root}>
       <header className={classes.header}>
-        {/* {currentUser &&  */}
-        <Typography variant="h3">{currentUser}'s profile</Typography>
-        {/* } */}
-        {currentUser && (
-          <Typography varinat="h4">Email: {currentUser.email}</Typography>
+        {userData && (
+          <>
+            <Typography variant="h3">
+              {userData.email.split("@")[0]}'s profile
+            </Typography>
+            <Typography varinat="h4">Email: {userData.email}</Typography>
+          </>
         )}
-        <Button  className={classes.logout} variant="outlined" color="primary" onClick={handleLogout}>
+        <Button
+          className={classes.logout}
+          variant="outlined"
+          color="primary"
+          onClick={logOut}
+        >
           Log Out
         </Button>
       </header>
@@ -41,9 +49,7 @@ const Profile = () => {
         <ProfileCard>
           <ProfileChart />
         </ProfileCard>
-        <ProfileCard>
-          List of Monkey Cards You Own
-        </ProfileCard>
+        <ProfileCard>List of Monkey Cards You Own</ProfileCard>
       </div>
     </div>
   );

@@ -1,37 +1,28 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Formik, Field } from "formik";
 import { MainGrid } from "../MainGrid";
 import { Button } from "@material-ui/core";
 import { Background } from "../Background";
 import { initialSigninValues, validate } from "./validation";
-import { useAuth } from "../Context/AuthContext";
 
 import * as SS from "./SignUp.styles";
 import { navigate } from "@reach/router";
+import { auth } from "../../config/firestore";
 
 const SignUp = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passworConfirmRef = useRef();
-  const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  async function handleSigninSubmit(e) {
-    // e.preventDefault();
-    if (passwordRef.current.value !== passworConfirmRef.current.value) {
-      return setError("Passwords do not Match");
-    }
+  const onSubmit = async (values) => {
     try {
-      console.log("a mers");
-      setError("");
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-    } catch {
-      setError("Failed to log in");
+      await auth.createUserWithEmailAndPassword(values.email, values.password)
+      if( values.password !== values.confirmPassword) {
+        return setError("Passwords do not Match")
+      }
+    } catch (error) {
+      setError("Failed to log in")
     }
-    setLoading(false);
-    navigate("/logIn");
+    navigate("/logIn")
   }
 
   return (
@@ -43,18 +34,16 @@ const SignUp = () => {
           <Formik
             initialValues={initialSigninValues}
             validationSchema={validate}
-            onSubmit={handleSigninSubmit}
+            onSubmit={onSubmit}
           >
             {({ values, errors }) => (
               <SS.StyledForm>
-                {currentUser && currentUser.email}
                 <Field
                   label="E-mail"
                   variant="outlined"
                   type="email"
                   name="email"
                   as={SS.StyledTextField}
-                  inputRef={emailRef}
                 />
                 <Field
                   as={SS.StyledTextField}
@@ -62,7 +51,6 @@ const SignUp = () => {
                   variant="outlined"
                   type="password"
                   name="password"
-                  inputRef={passwordRef}
                 />
                 <Field
                   as={SS.StyledTextField}
@@ -70,7 +58,6 @@ const SignUp = () => {
                   variant="outlined"
                   type="password"
                   name="confirmPassword"
-                  inputRef={passworConfirmRef}
                 />
                 {error && <span>{error}</span>}
                 {console.log(values)}

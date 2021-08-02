@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { useStyles } from "./Hero.styles";
 import startImg from "../../image/start.jpg";
-import { ChainExample, FadeInTitle } from "../../utils/FadeIn";
+import { FadeInTitle } from "../../utils/FadeIn";
 import { Button } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
 import { navigate } from "@reach/router";

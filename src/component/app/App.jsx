@@ -9,11 +9,6 @@ import { HomePage } from "../../pages/HomePage/HomePage";
 import { LogIn } from "../LogIn";
 import { SignUp } from "../SignUp/SignUp";
 import { Profile } from "../Profile";
-import {
-  createMemorySource,
-  createHistory,
-  LocationProvider,
-} from "@reach/router";
 
 const App = () => {
   return (

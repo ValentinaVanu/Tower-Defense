@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthProvider } from "../Context/AuthContext";
+import { AuthProvider } from "../../context/AuthContext";
 import { Profile } from "./Profile";
 
 export default {

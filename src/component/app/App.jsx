@@ -1,6 +1,5 @@
 import React from "react";
 import store from "../../store";
-import { AuthProvider } from "../Context/AuthContext";
 import { StyledAppWrapper, StyledRouter } from "./App.style";
 import { Play } from "../Play";
 import { Provider } from "react-redux";
@@ -9,6 +8,7 @@ import { HomePage } from "../../pages/HomePage/HomePage";
 import { LogIn } from "../LogIn";
 import { SignUp } from "../SignUp/SignUp";
 import { Profile } from "../Profile";
+import { AuthProvider } from "../../context/AuthContext";
 
 const App = () => {
   return (

@@ -6,9 +6,9 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
-import { useAuth } from '../Context/AuthContext';
 import { navigate } from '@reach/router';
 import { Typography } from '@material-ui/core';
+import { useAuth } from '../../context/AuthContext';
 
 
 const useStyles = makeStyles((theme) => ({

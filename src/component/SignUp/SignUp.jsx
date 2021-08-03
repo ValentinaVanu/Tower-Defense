@@ -46,7 +46,6 @@ const SignUp = () => {
           >
             {({ errors, isValid, values }) => (
               <SS.StyledForm onSubmit={() => onSubmit(values)}>
-                {console.log(values, " IN FORM")}
                 <Field
                   label="E-mail"
                   variant="outlined"

@@ -16,11 +16,13 @@ import * as SL from "./LogIn.style";
 import { useDispatch } from "react-redux";
 import { setUserAction } from "../../store/auth/auth.action";
 import { auth, GitHubProvider } from "../../config/firestore";
+import { useAuth } from "../../context/AuthContext";
 
 const LogIn = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   // const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleSignInWithGitHub = async () => {
     try {
@@ -34,16 +36,15 @@ const LogIn = () => {
     }
   };
 
-  const handleSignInWithEmail = async (values) => {
+  const onSubmit = async (values) => {
     try {
-      setError("");
-      // setLoading(true);
-      await auth.createUserWithEmailAndPassword(values.email, values.password);
-    } catch {
-      setError("Ops, something went wrong");
+      const {user: { displayName, email, idToken },
+    } = await login(values.email, values.password)
+    dispatch(setUserAction({ displayName, email, idToken }));
+    navigate("/profile");
+    } catch (error){
+      setError(error)
     }
-    // setLoading(false);
-    // navigate("/play");
   };
 
   return (
@@ -55,13 +56,15 @@ const LogIn = () => {
           <Typography onClick={handleSignInWithGitHub}>
             Sign in with Github
           </Typography>
+          {/* {currentUser && (
+            <Typography>You are logged in as {currentUser}</Typography>
+          )} */}
           <Formik
             initialValues={initialLogInValues}
             validationSchema={validate}
-            onSubmit={handleSignInWithEmail}
           >
-            {({ errors, touched }) => (
-              <SL.StyledForm onSubmit={handleSignInWithEmail}>
+            {({ errors, touched, values }) => (
+              <SL.StyledForm onSubmit={() => onSubmit(values)}>
                 <Field
                   as={SL.StyledTextField}
                   label="E-mail"

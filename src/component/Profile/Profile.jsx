@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { navigate } from "@reach/router";
 import { Button, Typography } from "@material-ui/core";
 import { ProfileChart } from "../Chart/Chart";
@@ -11,7 +11,6 @@ import { logoutAction } from "../../store/auth/auth.action";
 const Profile = () => {
   const userData = useSelector(({ auth }) => auth.user);
   const dispatch = useDispatch();
-  const [error, setError] = useState("");
   const classes = useStyles();
 
   const logOut = () => {
@@ -19,7 +18,6 @@ const Profile = () => {
       navigate("/logIn");
   };
 
-  console.log(userData);
   return (
     <div className={classes.root}>
       <header className={classes.header}>
@@ -40,7 +38,6 @@ const Profile = () => {
           Log Out
         </Button>
       </header>
-      {error && <Typography varinat="body1">{error}</Typography>}
       <div className={classes.cardSection}>
         <ProfileCard>
           <ProfileChart />

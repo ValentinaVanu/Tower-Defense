@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 
 import * as SL from "./LogIn.style";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserAction } from "../../store/auth/auth.action";
 import { auth, GitHubProvider } from "../../config/firestore";
 import { useAuth } from "../../context/AuthContext";
@@ -21,10 +21,12 @@ import { useAuth } from "../../context/AuthContext";
 const LogIn = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState("");
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+  const currentUser = useSelector(({ auth }) => auth.user)
 
   const handleSignInWithGitHub = async () => {
+    setLoading(true)
     try {
       const {
         user: { uid, displayName, photoURL, email },
@@ -34,17 +36,21 @@ const LogIn = () => {
     } catch (error) {
       console.log(error, "ops");
     }
+    setLoading(false)
   };
 
+
   const onSubmit = async (values) => {
+    setLoading(true)
     try {
-      const {user: { displayName, email, idToken },
+      const {user: { createdAt, email, emailVerified, lastLoginAt, lastRefreshAt, localId, photoUrl, screenName, providerUserInfo },
     } = await login(values.email, values.password)
-    dispatch(setUserAction({ displayName, email, idToken }));
+    dispatch(setUserAction({ createdAt, email, emailVerified, lastLoginAt, lastRefreshAt, localId, photoUrl, screenName, providerUserInfo }));
     navigate("/profile");
     } catch (error){
       setError(error)
     }
+    setLoading(false)
   };
 
   return (
@@ -56,9 +62,12 @@ const LogIn = () => {
           <Typography onClick={handleSignInWithGitHub}>
             Sign in with Github
           </Typography>
-          {/* {currentUser && (
-            <Typography>You are logged in as {currentUser}</Typography>
-          )} */}
+          {currentUser && (
+            <Typography>You are logged in as {currentUser.email}</Typography>
+          )}
+          {currentUser && currentUser.providerUserInfo && (
+            <Typography>You are logged in as {currentUser.providerUserInfo.map(({screenName})=> screenName)}</Typography>
+          )}
           <Formik
             initialValues={initialLogInValues}
             validationSchema={validate}

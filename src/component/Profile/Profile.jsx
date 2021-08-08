@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../store/auth/auth.action";
 
 const Profile = () => {
-  const userData = useSelector(({ auth }) => auth.user);
+  const currentUser = useSelector(({ auth }) => auth.user);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -21,12 +21,12 @@ const Profile = () => {
   return (
     <div className={classes.root}>
       <header className={classes.header}>
-        {userData && (
+        {currentUser && (
           <>
             <Typography variant="h3">
-              {userData.email.split("@")[0]}'s profile
+              {currentUser.email.split("@")[0]}'s profile
             </Typography>
-            <Typography varinat="h4">Email: {userData.email}</Typography>
+            <Typography varinat="h4">Email: {currentUser.email}</Typography>
           </>
         )}
         <Button

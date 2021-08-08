@@ -14,9 +14,10 @@ import { setUserAction } from "../../store/auth/auth.action";
 const SignUp = () => {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (values) => {
+    setLoading(true)
     const {
       user: { uid, displayName, photoURL, email },
     } = await auth
@@ -30,7 +31,8 @@ const SignUp = () => {
       .catch((error) => {
         setError("Failed to log in", error);
       });
-    navigate("/logIn");
+      navigate("/logIn");
+      setLoading(false)
   };
 
   return (

@@ -1,20 +1,22 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+// import 'firebase/app'
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBTSnk4DYeBrr_OyFpMyQnnFEcAmJOqH0g",
-  authDomain: "tower-defense-b9064.firebaseapp.com",
-  projectId: "tower-defense-b9064",
-  storageBucket: "tower-defense-b9064.appspot.com",
-  messagingSenderId: "858893818952",
-  appId: "1:858893818952:web:d17d20471395c0641bcc7d",
-  measurementId: "G-XWNHPFX4ZC",
+export const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MSI,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MID,
 };
 
 firebase.initializeApp(firebaseConfig)
 export const db = firebase.firestore()
-// export const storage = firebase.storage()
 export const ts = firebase.firestore.FieldValue.serverTimestamp();
 export const auth = firebase.auth();
+export const GitHubProvider = new firebase.auth.GithubAuthProvider()
+
 // export const GitHubProvider = new firebase.auth.GithubAuthProvider()

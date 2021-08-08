@@ -1,6 +1,5 @@
 import React from "react";
 import store from "../../store";
-import { AuthProvider } from "../Context/AuthContext";
 import { StyledAppWrapper, StyledRouter } from "./App.style";
 import { Play } from "../Play";
 import { Provider } from "react-redux";
@@ -8,12 +7,8 @@ import { ParallaxContainer } from "../Parallax/Parallax";
 import { HomePage } from "../../pages/HomePage/HomePage";
 import { LogIn } from "../LogIn";
 import { SignUp } from "../SignUp/SignUp";
-import { Profile } from "../Profile";
-import {
-  createMemorySource,
-  createHistory,
-  LocationProvider,
-} from "@reach/router";
+import { Dashboard } from "../Dashboard";
+import { AuthProvider } from "../../context/AuthContext";
 
 const App = () => {
   return (
@@ -25,7 +20,7 @@ const App = () => {
               <ParallaxContainer path="parallax" />
               <LogIn path="/logIn" />
               <SignUp path="signUp" />
-              <Profile path="profile" />
+              <Dashboard path="dashboard" />
               <Play path="play" />
             </StyledRouter>
         </AuthProvider>

@@ -6,7 +6,6 @@ import { StyledPlayWrapper } from "./Play.style";
 import { DndContext } from "@dnd-kit/core";
 import { StyledMap, XYMap } from "../Map/Map.style";
 import { useDroppable } from "@dnd-kit/core";
-import { useSelector } from "react-redux";
 
 const Play = () => {
   const XYmap = [...Array(100).keys()];

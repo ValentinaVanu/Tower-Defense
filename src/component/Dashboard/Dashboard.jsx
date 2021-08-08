@@ -18,14 +18,16 @@ const Dashboard = () => {
     navigate("/logIn");
   };
 
-  const userName = currentUser.email.split("@")[0];
+  const userName = () => {if(currentUser){
+    return currentUser.email.split("@")[0]
+  }}
 
   return (
     <div className={classes.root}>
       <header className={classes.header}>
         {currentUser && (
           <>
-            <Typography variant="h4">{userName}'s profile</Typography>
+            <Typography variant="h4">{userName()}'s profile</Typography>
             <Typography varinat="h4">Email: {currentUser.email}</Typography>
           </>
         )}

@@ -5,8 +5,8 @@ import { Play } from "../Play";
 import { Provider } from "react-redux";
 import { ParallaxContainer } from "../Parallax/Parallax";
 import { HomePage } from "../../pages/HomePage/HomePage";
-import { LogIn } from "../LogIn";
-import { SignUp } from "../SignUp/SignUp";
+import { LogIn } from "../Auth/LogIn";
+import { SignUp } from "../Auth/SignUp/SignUp";
 import { Dashboard } from "../Dashboard";
 import { AuthProvider } from "../../context/AuthContext";
 

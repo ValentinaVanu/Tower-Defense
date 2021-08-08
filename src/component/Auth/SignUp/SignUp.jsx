@@ -1,20 +1,36 @@
 import React, { useState } from "react";
 import { Formik, Field } from "formik";
-import { MainGrid } from "../MainGrid";
+import { MainGrid } from "../../MainGrid";
 import { Button } from "@material-ui/core";
-import { Background } from "../Background";
 import { initialSigninValues, validate } from "./validation";
 
-import * as SS from "./SignUp.styles";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import * as SS from "../elements";
 import { navigate } from "@reach/router";
-import { auth } from "../../config/firestore";
 import { useDispatch } from "react-redux";
-import { setUserAction } from "../../store/auth/auth.action";
+import { auth, GitHubProvider } from "../../../config/firestore";
+import { setUserAction } from "../../../store/auth/auth.action";
+import { Background } from "../../Background";
 
 const SignUp = () => {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+
+  const handleSignInWithGitHub = async () => {
+    setLoading(true);
+    try {
+      const {
+        user: { uid, displayName, photoURL, email },
+      } = await auth.signInWithPopup(GitHubProvider);
+
+      dispatch(setUserAction({ uid, displayName, photoURL, email }));
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error, "ops");
+    }
+    setLoading(false);
+  };
 
   const onSubmit = async (values) => {
     setLoading(true);
@@ -72,15 +88,24 @@ const SignUp = () => {
                   name="confirmPassword"
                 />
                 {error && <span>{error}</span>}
-                <Button
-                  color="primary"
-                  disabled={isValid}
-                  variant="contained"
-                  type="submit"
-                >
-                  Submit
-                </Button>
-                <SS.StyledLink to="/">Go back</SS.StyledLink>
+                <SS.BottomSection>
+                  <Button
+                    color="primary"
+                    disabled={isValid}
+                    variant="contained"
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                  <SS.GithubPopup onClick={handleSignInWithGitHub}>
+                    Log in with Github{" "}
+                    <GitHubIcon
+                      fontSize="small"
+                      style={{ marginLeft: "8px" }}
+                    />
+                  </SS.GithubPopup>
+                  <SS.StyledLink to="/">Go back</SS.StyledLink>
+                </SS.BottomSection>
               </SS.StyledForm>
             )}
           </Formik>

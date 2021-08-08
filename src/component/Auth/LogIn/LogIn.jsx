@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import { Field, Formik } from "formik";
-import { validate, initialLogInValues } from "../Auth/LogIn/validation";
+import { validate, initialLogInValues } from "./validation";
 import { navigate } from "@reach/router";
-import { MainGrid } from "../MainGrid";
-import { StyledPaper } from "./LogIn.style";
-import { Background } from "../Background";
-import {
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Typography,
-} from "@material-ui/core";
+import { post } from 'axios';
+import { MainGrid } from "../../MainGrid";
+import { StyledPaper } from "../elements";
+import { Background } from "../../Background";
+import { Button, Typography } from "@material-ui/core";
 
-import * as SL from "./LogIn.style";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import * as SL from "../elements";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserAction } from "../../store/auth/auth.action";
-import { auth, GitHubProvider } from "../../config/firestore";
-import { useAuth } from "../../context/AuthContext";
+import { setUserAction } from "../../../store/auth/auth.action";
+import { auth, firebaseConfig, GitHubProvider } from "../../../config/firestore";
+import { useAuth } from "../../../context/AuthContext";
 
 const LogIn = () => {
   const dispatch = useDispatch();
@@ -31,8 +28,9 @@ const LogIn = () => {
       const {
         user: { uid, displayName, photoURL, email },
       } = await auth.signInWithPopup(GitHubProvider);
+
       dispatch(setUserAction({ uid, displayName, photoURL, email }));
-      navigate("/profile");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error, "ops");
     }
@@ -41,7 +39,20 @@ const LogIn = () => {
 
   const onSubmit = async (values) => {
     setLoading(true);
+    const newUserData = {
+      email: values.email,
+      password: values.password,
+      returnSecureToken: true
+    }
     try {
+      post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseConfig.apiKey}`, newUserData)
+      .then(res => {
+        console.log(res)
+        // On this response I will set the user
+        // It tells if the account exists or not
+        // https://firebase.google.com/docs/reference/rest/auth
+        // EX: EMAIL_NOT_FOUND, INVALID_PASSWORD, USER_DISABLED
+      })
       const {
         user: {
           createdAt,
@@ -68,7 +79,7 @@ const LogIn = () => {
           providerUserInfo,
         })
       );
-      navigate("/profile");
+      navigate("/dashboard");
     } catch (error) {
       setError(error);
     }
@@ -81,9 +92,6 @@ const LogIn = () => {
         <StyledPaper elevation={8}>
           <SL.StyledFormHeader to="/signUp">Sign Up</SL.StyledFormHeader>
           <SL.StyledFormTitle>Log In</SL.StyledFormTitle>
-          <Typography onClick={handleSignInWithGitHub}>
-            Sign in with Github
-          </Typography>
           {currentUser && (
             <Typography>You are logged in as {currentUser.email}</Typography>
           )}
@@ -114,17 +122,21 @@ const LogIn = () => {
                   variant="outlined"
                   type="password"
                 />
-                <FormControlLabel
-                  control={<Checkbox />}
-                  color="primary"
-                  label="Accept Terms and Conditions"
-                />
-                {errors.password && touched.password && errors.password}
-                {error}
-                <Button variant="contained" type="submit">
-                  Log in
-                </Button>
-                <SL.StyledLink to="/sign-up">Create an account</SL.StyledLink>
+                <SL.BottomSection>
+                  {errors.password && touched.password && errors.password}
+                  {error}
+                  <Button variant="contained" type="submit">
+                    Log in
+                  </Button>
+                  <SL.GithubPopup onClick={handleSignInWithGitHub}>
+                    Log in with Github{" "}
+                    <GitHubIcon
+                      fontSize="small"
+                      style={{ marginLeft: "8px" }}
+                    />
+                  </SL.GithubPopup>
+                  <SL.StyledLink to="/sign-up">Create an account</SL.StyledLink>
+                </SL.BottomSection>
               </SL.StyledForm>
             )}
           </Formik>

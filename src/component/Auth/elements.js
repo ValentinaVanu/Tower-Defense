@@ -3,6 +3,20 @@ import { Paper, TextField } from "@material-ui/core";
 import { Form } from "formik";
 import { Link } from "@reach/router";
 
+
+export const BottomSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
+
+export const GithubPopup = styled.div`
+  display: flex;
+  align-items: center;
+  padding-top: 24px;
+  width: 100%;
+`
+
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: #00a4f1;
@@ -38,6 +52,7 @@ export const StyledFormTitle = styled.h1`
 export const StyledTextField = styled(TextField)`
   && {
     margin: 10px;
+    width: 100%;
   }
 `;
 

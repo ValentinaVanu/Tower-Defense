@@ -1,22 +1,22 @@
 import React from "react";
-import { ProfileChart } from "./Chart";
+import { DashboardChart } from "./Chart";
 
 export default {
   title: "Components/ProfileChart",
-  component: ProfileChart,
+  component: DashboardChart,
   argTypes: {
     title: {
       controls: {
-        type: 'text',
-      }
-    }
-  }
+        type: "text",
+      },
+    },
+  },
 };
 
-export const Default = (args) => <ProfileChart {...args} />;
+export const Default = (args) => <DashboardChart {...args} />;
 
 Default.args = {
   win: 12,
   loss: 4,
-  title: 'Title Example'
+  title: "Title Example",
 };

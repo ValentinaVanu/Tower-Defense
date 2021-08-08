@@ -7,7 +7,7 @@ import { ParallaxContainer } from "../Parallax/Parallax";
 import { HomePage } from "../../pages/HomePage/HomePage";
 import { LogIn } from "../LogIn";
 import { SignUp } from "../SignUp/SignUp";
-import { Profile } from "../Profile";
+import { Dashboard } from "../Dashboard";
 import { AuthProvider } from "../../context/AuthContext";
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
               <ParallaxContainer path="parallax" />
               <LogIn path="/logIn" />
               <SignUp path="signUp" />
-              <Profile path="profile" />
+              <Dashboard path="dashboard" />
               <Play path="play" />
             </StyledRouter>
         </AuthProvider>

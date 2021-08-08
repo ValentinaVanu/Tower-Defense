@@ -1,33 +1,31 @@
 import React from "react";
 import { navigate } from "@reach/router";
 import { Button, Typography } from "@material-ui/core";
-import { ProfileChart } from "../Chart/Chart";
-import { ProfileCard } from "./ProfileCard";
+import { DashboardChart } from "../Chart/Chart";
+import { DashboardCard } from "./DashboardCard";
 
-import { useStyles } from "./Profile.styles";
+import { useStyles } from "./Dashboard.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../store/auth/auth.action";
 
-const Profile = () => {
+const Dashboard = () => {
   const currentUser = useSelector(({ auth }) => auth.user);
   const dispatch = useDispatch();
   const classes = useStyles();
 
   const logOut = () => {
-      dispatch(logoutAction());
-      navigate("/logIn");
+    dispatch(logoutAction());
+    navigate("/logIn");
   };
 
-  const userName = currentUser.email.split("@")[0]
+  const userName = currentUser.email.split("@")[0];
 
   return (
     <div className={classes.root}>
       <header className={classes.header}>
         {currentUser && (
           <>
-            <Typography variant="h4">
-              {userName}'s profile
-            </Typography>
+            <Typography variant="h4">{userName}'s profile</Typography>
             <Typography varinat="h4">Email: {currentUser.email}</Typography>
           </>
         )}
@@ -41,13 +39,13 @@ const Profile = () => {
         </Button>
       </header>
       <div className={classes.cardSection}>
-        <ProfileCard>
-          <ProfileChart />
-        </ProfileCard>
-        <ProfileCard>List of Monkey Cards You Own</ProfileCard>
+        <DashboardCard>
+          <DashboardChart />
+        </DashboardCard>
+        <DashboardCard>List of Monkey Cards You Own</DashboardCard>
       </div>
     </div>
   );
 };
 
-export { Profile };
+export { Dashboard };

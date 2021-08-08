@@ -68,7 +68,7 @@ const getChartOptions = (data, title) => {
   };
 };
 
-export const ProfileChart = ({ data, title }) => {
+export const DashboardChart = ({ data, title }) => {
   return (
     <div>
       <HighchartsReact
@@ -80,12 +80,12 @@ export const ProfileChart = ({ data, title }) => {
   );
 };
 
-ProfileChart.defaultProps = {
+DashboardChart.defaultProps = {
   title: "Title",
   data: { win: [0, 1, 2, 3, 4, 5, 6, 7, 8], loss: [0, 1, 4, 6, 2, 1, 0] },
 };
 
-ProfileChart.propTypes = {
+DashboardChart.propTypes = {
   title: PropTypes.string,
   data: PropTypes.object,
 };

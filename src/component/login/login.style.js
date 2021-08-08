@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { Paper, TextField } from "@material-ui/core";
 import { Form } from "formik";
-import { Link } from '@reach/router';
-
+import { Link } from "@reach/router";
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
@@ -12,7 +11,7 @@ export const StyledLink = styled(Link)`
   :hover {
     color: #44650a;
   }
-`
+`;
 
 export const StyledFormHeader = styled(Link)`
   text-decoration: none;
@@ -24,7 +23,7 @@ export const StyledFormHeader = styled(Link)`
   border-radius: 10px 10px 0 0;
   cursor: pointer;
   color: #fff;
-  :hover{
+  :hover {
     /* background-color: #ec1c24; */
     background-color: #44650a;
     /* border-bottom: 5px solid #44650a; */

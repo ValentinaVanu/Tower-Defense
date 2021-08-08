@@ -23,10 +23,10 @@ const LogIn = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
-  const currentUser = useSelector(({ auth }) => auth.user)
+  const currentUser = useSelector(({ auth }) => auth.user);
 
   const handleSignInWithGitHub = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const {
         user: { uid, displayName, photoURL, email },
@@ -36,21 +36,43 @@ const LogIn = () => {
     } catch (error) {
       console.log(error, "ops");
     }
-    setLoading(false)
+    setLoading(false);
   };
 
-
   const onSubmit = async (values) => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const {user: { createdAt, email, emailVerified, lastLoginAt, lastRefreshAt, localId, photoUrl, screenName, providerUserInfo },
-    } = await login(values.email, values.password)
-    dispatch(setUserAction({ createdAt, email, emailVerified, lastLoginAt, lastRefreshAt, localId, photoUrl, screenName, providerUserInfo }));
-    navigate("/profile");
-    } catch (error){
-      setError(error)
+      const {
+        user: {
+          createdAt,
+          email,
+          emailVerified,
+          lastLoginAt,
+          lastRefreshAt,
+          localId,
+          photoUrl,
+          screenName,
+          providerUserInfo,
+        },
+      } = await login(values.email, values.password);
+      dispatch(
+        setUserAction({
+          createdAt,
+          email,
+          emailVerified,
+          lastLoginAt,
+          lastRefreshAt,
+          localId,
+          photoUrl,
+          screenName,
+          providerUserInfo,
+        })
+      );
+      navigate("/profile");
+    } catch (error) {
+      setError(error);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
@@ -66,7 +88,10 @@ const LogIn = () => {
             <Typography>You are logged in as {currentUser.email}</Typography>
           )}
           {currentUser && currentUser.providerUserInfo && (
-            <Typography>You are logged in as {currentUser.providerUserInfo.map(({screenName})=> screenName)}</Typography>
+            <Typography>
+              You are logged in as{" "}
+              {currentUser.providerUserInfo.map(({ screenName }) => screenName)}
+            </Typography>
           )}
           <Formik
             initialValues={initialLogInValues}

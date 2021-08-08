@@ -2,11 +2,11 @@ import React from "react";
 import { Provider } from "react-redux";
 import { AuthProvider } from "../../context/AuthContext";
 import store from "../../store";
-import { Profile } from "./Profile";
+import { Dashboard } from "./Dashboard";
 
 export default {
-  title: "Components/Profile",
-  component: Profile,
+  title: "Components/Dashboard",
+  component: Dashboard,
   argTypes: {
     userName:{
       control:{
@@ -19,7 +19,7 @@ export default {
 export const Default = (args) => (
   <Provider store={store}>
     <AuthProvider>
-      <Profile {...args} />
+      <Dashboard {...args} />
     </AuthProvider>
   </Provider>
 );

@@ -1,4 +1,5 @@
 import React from "react";
+import { AuthProvider } from "../../../context/AuthContext";
 import { ProfileCard } from "./index";
 
 export default {
@@ -6,7 +7,7 @@ export default {
   component: ProfileCard,
 };
 
-const Template = (args) => <ProfileCard {...args} />;
+const Template = (args) => <AuthProvider><ProfileCard {...args} /></AuthProvider>;
 
 export const Card = Template.bind({});
 

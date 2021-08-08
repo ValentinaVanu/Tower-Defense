@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
     width: "100%",
+    background: '#0e111c',
   },
   header: {
     display: "flex",
@@ -11,7 +12,8 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: theme.spacing(5),
-    color: "rgb(36,0,119)",
+    color: "#fff",
+    padding: theme.spacing(4, 8),
   },
   cardSection: {
     display: "flex",

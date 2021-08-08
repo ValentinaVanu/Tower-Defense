@@ -18,13 +18,15 @@ const Profile = () => {
       navigate("/logIn");
   };
 
+  const userName = currentUser.email.split("@")[0]
+
   return (
     <div className={classes.root}>
       <header className={classes.header}>
         {currentUser && (
           <>
-            <Typography variant="h3">
-              {currentUser.email.split("@")[0]}'s profile
+            <Typography variant="h4">
+              {userName}'s profile
             </Typography>
             <Typography varinat="h4">Email: {currentUser.email}</Typography>
           </>
